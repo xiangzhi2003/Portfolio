@@ -18,7 +18,7 @@ Live site: `https://chiangxiangzhi.vercel.app`
 - **Filterable Skills Grid** - Category-based filtering with animated transitions
 - **Responsive Timeline** - Work, education, and achievements with filter tabs
 - **Glassmorphism Design** - Modern glass card effects with cosmic gradients
-- **Dark Mode** - Full dark theme with space-inspired aesthetic
+- **Dark Theme** - Space-inspired aesthetic (currently forced dark via ThemeProvider)
 
 ## 🛠️ Tech Stack
 
@@ -40,7 +40,6 @@ Live site: `https://chiangxiangzhi.vercel.app`
 
 **Runtime**
 - `next`, `react`, `react-dom`
-- `tailwindcss` (via build pipeline)
 - `framer-motion`, `gsap`, `lenis`
 - `swiper`
 - `lucide-react`
@@ -48,6 +47,7 @@ Live site: `https://chiangxiangzhi.vercel.app`
 **Dev**
 - `typescript`
 - `eslint`, `eslint-config-next`
+- `tailwindcss`, `@tailwindcss/postcss`
 - `@types/*`
 
 ## 🧩 Installation (Optional for local dev)
