@@ -58,7 +58,7 @@ export function TechStack() {
     );
 
     return (
-        <section id="skills" className="relative py-24 px-6 overflow-hidden">
+        <div className="relative py-24 px-6 overflow-hidden">
             {/* Background */}
             <div className="absolute inset-0 bg-slate-900/50" />
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-blue-500/5 rounded-full blur-3xl" />
@@ -177,6 +177,6 @@ export function TechStack() {
                     </motion.div>
                 </div>
             </div>
-        </section>
+        </div>
     );
 }

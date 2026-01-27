@@ -151,12 +151,3 @@ function getRevealConfig(type: string) {
     }
 }
 
-export function GSAPStaggerItem({
-    children,
-    className = "",
-}: {
-    children: ReactNode;
-    className?: string;
-}) {
-    return <div className={`gsap-stagger-item ${className}`}>{children}</div>;
-}

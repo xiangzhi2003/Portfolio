@@ -159,7 +159,7 @@ export function Timeline() {
     };
 
     return (
-        <section className="relative py-24 px-6 overflow-hidden">
+        <div className="relative py-24 px-6 overflow-hidden">
             {/* Background */}
             <div className="absolute inset-0 bg-slate-900/30" />
             <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-3xl -translate-y-1/2" />
@@ -335,6 +335,6 @@ export function Timeline() {
                     </a>
                 </motion.div>
             </div>
-        </section>
+        </div>
     );
 }

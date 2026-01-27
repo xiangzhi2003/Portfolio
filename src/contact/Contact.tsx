@@ -47,7 +47,7 @@ const socialLinks = [
 
 export function Contact() {
     return (
-        <section className="relative py-24 px-4 md:px-6 overflow-hidden min-h-screen flex items-center justify-center">
+        <div className="relative py-24 px-4 md:px-6 overflow-hidden min-h-screen flex items-center justify-center">
             {/* Enhanced cosmic background for contact */}
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/30 to-slate-900/50" />
             <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-blue-500/10 rounded-full blur-[120px] animate-pulse-slow" />
@@ -188,6 +188,6 @@ export function Contact() {
                     </p>
                 </motion.div>
             </div>
-        </section>
+        </div>
     );
 }

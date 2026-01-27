@@ -83,7 +83,7 @@ export function Projects() {
     const [activeIndex, setActiveIndex] = useState(0);
 
     return (
-        <section id="projects" className="relative py-24 overflow-hidden">
+        <div className="relative py-24 overflow-hidden">
             {/* Background */}
             <div className="absolute inset-0 bg-background" />
             <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-3xl" />
@@ -296,6 +296,6 @@ export function Projects() {
                     </a>
                 </motion.div>
             </div>
-        </section>
+        </div>
     );
 }
