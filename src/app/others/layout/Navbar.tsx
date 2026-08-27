@@ -1,188 +1,120 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { useSmoothScroll } from "@/app/others/providers/SmoothScrollProvider";
+import { ScrollProgress } from "@/app/others/layout/ScrollProgress";
 
-const navLinks = [
-    { name: "Home", href: "#home" },
+const links = [
     { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Timeline", href: "#timeline" },
+    { name: "Work", href: "#work" },
+    { name: "Stack", href: "#stack" },
+    { name: "Log", href: "#log" },
     { name: "Contact", href: "#contact" },
 ];
 
 export function Navbar() {
     const [scrolled, setScrolled] = useState(false);
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [activeSection, setActiveSection] = useState("home");
-    const { scrollTo } = useSmoothScroll();
+    const [open, setOpen] = useState(false);
+    const [active, setActive] = useState("");
 
     useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
-
-            if (window.scrollY < 100) {
-                setActiveSection("home");
-                return;
-            }
-
-            const sections = navLinks.map(link => link.href.slice(1));
-            for (const section of [...sections].reverse()) {
-                const element = document.getElementById(section);
-                if (element) {
-                    const rect = element.getBoundingClientRect();
-                    if (rect.top <= 150) {
-                        setActiveSection(section);
-                        break;
-                    }
-                }
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
+        const onScroll = () => setScrolled(window.scrollY > 24);
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => window.removeEventListener("scroll", onScroll);
     }, []);
 
-    const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-        e.preventDefault();
-        const targetId = href.slice(1);
+    // Scroll spy: the last section whose top has passed the nav is the active one.
+    useEffect(() => {
+        const sections = links
+            .map((link) => document.getElementById(link.href.slice(1)))
+            .filter((el): el is HTMLElement => el !== null);
 
-        if (targetId === "home") {
-            scrollTo(0, { offset: 0, duration: 1.2 });
-            setActiveSection("home");
-        } else {
-            const element = document.getElementById(targetId);
-            if (element) {
-                scrollTo(element, { offset: -80, duration: 1.2 });
-            }
-        }
-        setMobileMenuOpen(false);
-    };
+        const observer = new IntersectionObserver(
+            (records) => {
+                const visible = records
+                    .filter((record) => record.isIntersecting)
+                    .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
 
-    const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-        e.preventDefault();
-        window.location.href = "/";
-    };
+                if (visible.length > 0) setActive(visible[0].target.id);
+            },
+            { rootMargin: "-20% 0px -70% 0px" },
+        );
+
+        sections.forEach((section) => observer.observe(section));
+        return () => observer.disconnect();
+    }, []);
+
+    // Lock the page while the mobile sheet is open.
+    useEffect(() => {
+        document.body.style.overflow = open ? "hidden" : "";
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [open]);
 
     return (
-        <>
-            <motion.nav
-                initial={{ y: -100, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
-                    ? "bg-[#0a0a0a]/90 backdrop-blur-xl border-b border-slate-800/50"
-                    : "bg-transparent"
-                    }`}
-            >
-                <div className="flex items-center justify-between px-8 md:px-16 lg:px-24 h-16 md:h-20">
-                    {/* Logo - Refreshes page */}
-                    <motion.a
-                        href="/"
-                        onClick={handleLogoClick}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.2 }}
-                        className="text-2xl md:text-3xl font-bold text-white hover:text-blue-400 transition-colors duration-300"
-                    >
-                        C
-                    </motion.a>
+        <nav
+            className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${scrolled
+                ? "border-b border-[var(--rule-soft)] bg-[color-mix(in_srgb,var(--bg)_88%,transparent)] backdrop-blur-md"
+                : "border-b border-transparent"
+                }`}
+        >
+            <ScrollProgress />
 
-                    {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center gap-10 lg:gap-14">
-                        {navLinks.map((link, index) => (
-                            <motion.a
+            <div className="shell flex h-16 items-center justify-between">
+                <a
+                    href="#home"
+                    className="font-mono text-[length:var(--text-label)] tracking-[0.2em] text-[var(--fg)] transition-colors hover:text-[var(--accent)]"
+                >
+                    CXZ
+                </a>
+
+                <div className="hidden items-center gap-8 md:flex">
+                    {links.map((link) => {
+                        const isActive = active === link.href.slice(1);
+                        return (
+                            <a
                                 key={link.name}
                                 href={link.href}
-                                onClick={(e) => scrollToSection(e, link.href)}
-                                initial={{ opacity: 0, y: -20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.1 * (index + 1), duration: 0.5 }}
-                                className={`text-sm tracking-[0.2em] uppercase transition-colors duration-300 ${activeSection === link.href.slice(1)
-                                    ? "text-blue-400"
-                                    : "text-slate-400 hover:text-white"
-                                    }`}
+                                data-active={isActive}
+                                className={`label nav-link ${isActive ? "text-[var(--accent)]" : ""}`}
                             >
                                 {link.name}
-                            </motion.a>
-                        ))}
-                    </div>
-
-                    {/* Mobile: Menu Button */}
-                    <motion.button
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.3 }}
-                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        className="md:hidden p-2 text-slate-400 hover:text-white transition-colors"
-                        aria-label="Toggle menu"
-                    >
-                        {mobileMenuOpen ? (
-                            <X className="w-6 h-6" />
-                        ) : (
-                            <Menu className="w-6 h-6" />
-                        )}
-                    </motion.button>
+                            </a>
+                        );
+                    })}
                 </div>
-            </motion.nav>
 
-            {/* Mobile Menu */}
-            <AnimatePresence>
-                {mobileMenuOpen && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-40 md:hidden"
-                    >
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-                        />
+                <button
+                    onClick={() => setOpen((value) => !value)}
+                    className="-mr-2 p-2 text-[var(--fg-muted)] transition-colors hover:text-[var(--fg)] md:hidden"
+                    aria-label={open ? "Close menu" : "Open menu"}
+                    aria-expanded={open}
+                >
+                    {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                </button>
+            </div>
 
-                        <motion.div
-                            initial={{ x: "100%" }}
-                            animate={{ x: 0 }}
-                            exit={{ x: "100%" }}
-                            transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                            className="absolute right-0 top-0 bottom-0 w-3/4 max-w-sm bg-[#0a0a0a] border-l border-slate-800 shadow-2xl"
+            {/* Mobile sheet */}
+            <div
+                className={`overflow-hidden border-t border-[var(--rule-soft)] bg-[var(--bg)] transition-[max-height] duration-300 ease-out md:hidden ${open ? "max-h-96" : "max-h-0 border-t-transparent"
+                    }`}
+            >
+                <div className="shell flex flex-col py-2">
+                    {links.map((link) => (
+                        <a
+                            key={link.name}
+                            href={link.href}
+                            onClick={() => setOpen(false)}
+                            className={`label border-b border-[var(--rule-soft)] py-4 last:border-b-0 ${active === link.href.slice(1) ? "text-[var(--accent)]" : ""
+                                }`}
                         >
-                            <div className="flex flex-col h-full pt-24 px-8 pb-8">
-                                <nav className="flex-1 space-y-1">
-                                    {navLinks.map((link, index) => (
-                                        <motion.a
-                                            key={link.name}
-                                            href={link.href}
-                                            onClick={(e) => scrollToSection(e, link.href)}
-                                            initial={{ opacity: 0, x: 20 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: index * 0.08 }}
-                                            className={`block px-4 py-4 text-lg font-medium tracking-[0.15em] uppercase border-b border-slate-800 transition-colors ${activeSection === link.href.slice(1)
-                                                ? "text-blue-400"
-                                                : "text-slate-400 hover:text-white"
-                                                }`}
-                                        >
-                                            {link.name}
-                                        </motion.a>
-                                    ))}
-                                </nav>
-
-                                <div className="pt-6 border-t border-slate-800">
-                                    <p className="text-sm text-slate-500">
-                                        &copy; {new Date().getFullYear()} Chiang Xiang Zhi
-                                    </p>
-                                </div>
-                            </div>
-                        </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </>
+                            {link.name}
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </nav>
     );
 }

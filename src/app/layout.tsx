@@ -1,61 +1,75 @@
-import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
-import { SpaceBackgroundGlobal } from "@/app/others/layout/SpaceBackgroundGlobal";
-import { SmoothScrollProvider } from "@/app/others/providers/SmoothScrollProvider";
-import { ThemeProvider } from "@/app/others/providers/ThemeProvider";
+import type { Metadata, Viewport } from "next";
+import { Archivo, Instrument_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://chiangxiangzhi.vercel.app";
 
-const inter = Inter({
-  variable: "--font-inter",
+/* Display: Archivo, set tight and heavy. Carries the name and the language marks. */
+const archivo = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  display: "swap",
 });
 
+/* Body: Instrument Sans — warm, quiet, and not Inter. */
+const instrumentSans = Instrument_Sans({
+  variable: "--font-instrument-sans",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+/* Data: every label, year, and count on the page. */
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Chiang Xiang Zhi | Software Engineering Student",
+  title: "Chiang Xiang Zhi — Software Engineer",
   description:
-    "Personal portfolio of Chiang Xiang Zhi - Software Engineering Student at APU, currently interning at IJM Corporation. Building robust systems and scalable solutions.",
-  alternates: {
-    canonical: "/",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
+    "Software engineering graduate from APU, previously a software engineering intern at IJM Corporation. I build management systems for desktop, mobile, and the web in C#, Flutter, Java, and Python. Available for graduate engineering roles.",
+  alternates: { canonical: "/" },
+  robots: { index: true, follow: true },
   keywords: [
     "Software Engineer",
-    "Developer",
+    "Chiang Xiang Zhi",
     "Portfolio",
-    "Java",
     "C#",
-    "Python",
     "Flutter",
+    "Java",
+    "Python",
     "APU",
-    "IJM Corporation",
+    "Kuala Lumpur",
   ],
   authors: [{ name: "Chiang Xiang Zhi" }],
   openGraph: {
-    title: "Chiang Xiang Zhi | Software Engineering Student",
+    title: "Chiang Xiang Zhi — Software Engineer",
     description:
-      "Personal portfolio of Chiang Xiang Zhi - Building robust systems and scalable solutions.",
+      "Software engineering graduate from APU, available for graduate engineering roles. Building management systems for desktop, mobile, and the web.",
     type: "website",
     url: "/",
     siteName: "Chiang Xiang Zhi",
   },
   twitter: {
     card: "summary",
-    title: "Chiang Xiang Zhi | Software Engineering Student",
+    title: "Chiang Xiang Zhi — Software Engineer",
     description:
-      "Personal portfolio of Chiang Xiang Zhi - Building robust systems and scalable solutions.",
+      "Software engineering graduate from APU, available for graduate engineering roles.",
   },
+};
+
+/**
+ * Paints the browser chrome to match the paper ground, and declares the page
+ * light-only so browsers don't auto-invert it into a dark theme.
+ */
+export const viewport: Viewport = {
+  themeColor: "#eae6db",
+  colorScheme: "light",
 };
 
 export default function RootLayout({
@@ -64,16 +78,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased bg-background text-foreground`}
+        className={`${archivo.variable} ${instrumentSans.variable} ${jetbrainsMono.variable} antialiased`}
       >
-        <ThemeProvider>
-          <SmoothScrollProvider>
-            <SpaceBackgroundGlobal />
-            {children}
-          </SmoothScrollProvider>
-        </ThemeProvider>
+        {children}
+        {/* Paper grain, over everything, inert. */}
+        <div className="grain" aria-hidden="true" />
       </body>
     </html>
   );

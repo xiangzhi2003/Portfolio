@@ -1,98 +1,154 @@
-# 🚀 Xiang Zhi Portfolio
+# Chiang Xiang Zhi — Portfolio
 
-A modern, animated portfolio website built with Next.js 16, featuring smooth scroll animations, parallax effects, and a cosmic-themed design.
+Personal portfolio site. Built with Next.js 16 and Tailwind CSS 4, deployed on Vercel.
 
-Live site: `https://chiangxiangzhi.vercel.app`
+Live: https://chiangxiangzhi.vercel.app
 
 ![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
 ![React](https://img.shields.io/badge/React-19-61dafb?logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?logo=typescript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38bdf8?logo=tailwindcss)
 
-## ✨ Features
+## Design
 
-- **Smooth Scroll Animations** - Lenis smooth scrolling with GSAP ScrollTrigger integration
-- **Parallax Hero Section** - Dynamic hero-to-about transition with scroll-based effects
-- **3D Project Carousel** - Swiper.js coverflow slider for project showcase
-- **Interactive Cursor Spotlight** - Mouse-following glow effect on desktop
-- **Filterable Skills Grid** - Category-based filtering with animated transitions
-- **Responsive Timeline** - Work, education, and achievements with filter tabs
-- **Glassmorphism Design** - Modern glass card effects with cosmic gradients
-- **Dark Theme** - Space-inspired aesthetic (currently forced dark via ThemeProvider)
+The site is a **build log** — an index of what I've built and where I've been,
+presented like an engineering spec sheet rather than a landing page.
 
-## 🛠️ Tech Stack
+Three rules hold it together:
 
-| Category | Technologies |
-|----------|-------------|
-| **Framework** | Next.js 16 (App Router) |
-| **UI** | React 19 |
-| **Language** | TypeScript |
-| **Styling** | Tailwind CSS 4, PostCSS |
-| **Animations** | Framer Motion, GSAP + ScrollTrigger |
-| **Smooth Scroll** | Lenis |
-| **Carousel** | Swiper.js |
-| **Icons** | Lucide React |
-| **Tooling** | ESLint (eslint-config-next) |
-| **Deployment** | Vercel |
-| **Fonts** | Inter, JetBrains Mono (via next/font) |
+- **One accent.** Brass (`#8a6114`), used only for live state, links, and the
+  language marks. Everything else is warm paper and ink. Every text colour is
+  checked against the ground for WCAG AA.
+- **A label rail.** Every section is a sticky mono label on the left and content
+  on the right, so the page has one structural idea instead of six. The rail also
+  carries a brass track showing how far through that section you've scrolled.
+- **The language mark.** Each project is stamped with the language it was built
+  in, set large in the display face. Scrolling the work section reads
+  `C# → Flutter → Java → Python → C++ → R` — the honest through-line, and the
+  reason there are no per-project gradients or decorative icons.
 
-## 📦 Dependencies
+Type is Archivo (display), Instrument Sans (body), and JetBrains Mono (every
+label, year, and count), on a ~1.25 modular scale defined once as tokens in
+`globals.css` — no per-component font sizes.
 
-**Runtime**
-- `next`, `react`, `react-dom`
-- `framer-motion`, `gsap`, `lenis`
-- `swiper`
-- `lucide-react`
+The ground is a warm paper white with a generated fractal-noise grain over it.
+The texture is what keeps a light theme from reading as flat white screen; it
+costs no network request.
 
-**Dev**
-- `typescript`
-- `eslint`, `eslint-config-next`
-- `tailwindcss`, `@tailwindcss/postcss`
-- `@types/*`
+Motion is tied to content or interaction, never ambient: a load sequence and mask
+wipe in the hero, scroll progress in the rails and above the nav, a 12px settle
+on first view, a sliding filter underline, and hover states on entries and links.
+Nothing loops, nothing parallaxes, and `prefers-reduced-motion` is respected.
 
-## 🧩 Installation (Optional for local dev)
+## Structure
 
-You only need this if you want to run the project locally.
+```
+src/
+├── app/
+│   ├── layout.tsx              fonts + metadata
+│   ├── page.tsx                section order
+│   ├── globals.css             design tokens + component classes
+│   ├── robots.ts, sitemap.ts
+│   └── others/layout/
+│       ├── Navbar.tsx          nav + scroll spy
+│       ├── SectionRail.tsx     sticky label + section progress
+│       ├── ScrollProgress.tsx  page progress bar
+│       └── Reveal.tsx          scroll reveals (settle + mask)
+├── home/Hero.tsx               name + status block
+├── about/About.tsx, content.ts
+├── projects/Projects.tsx       work index
+├── skills/TechStack.tsx        stack spec sheet
+├── timeline/Timeline.tsx       log
+└── contact/Contact.tsx         contact + footer
+```
+
+## Editing content
+
+All content is plain data at the top of its section file:
+
+| What | Where |
+|------|-------|
+| Name, status rows, intro | `src/home/Hero.tsx` |
+| Bio and facts | `src/about/content.ts` |
+| Projects | `projects` array in `src/projects/Projects.tsx` |
+| Project screenshots | `public/projects/` — see below |
+| Stack | `groups` array in `src/skills/TechStack.tsx` |
+| Experience, education, awards | `entries` array in `src/timeline/Timeline.tsx` |
+| Contact details | `channels` array in `src/contact/Contact.tsx` |
+| Colours, type sizes, spacing, speed | the **ADJUST ME** block at the top of `src/app/globals.css` |
+| Profile photo, resume | `public/profile.jpg`, `public/resume.pdf` |
+
+Adding an `href` to a project makes that whole tile a link to the repo.
+
+### Common adjustments
+
+Every visual value lives in one commented block at the top of
+`src/app/globals.css`. A few you're most likely to want:
+
+| To change | Edit |
+|---|---|
+| Size of your name | `--text-display` |
+| Page darkness | `--bg`, `--bg-alt`, `--bg-sunken` |
+| How big body text is | `--text-prose` |
+| How big project titles are | `--text-title` |
+| Speed of the scrolling stack | `--marquee-speed` (higher = slower) |
+| Width of the left label column | `--rail` |
+
+If you darken `--bg`, check the contrast ratios noted beside the text colours
+and darken those to match — keep every one at 4.5:1 or better.
+
+### Adding a project screenshot
+
+Every project row has a preview slot. Until a screenshot exists it holds the
+language mark, so the layout is the same either way:
+
+1. Drop the image in `public/projects/` — 16:10, around 1600×1000, PNG or JPG.
+2. Add one line to that project in `src/projects/Projects.tsx`:
+
+```ts
+{
+    title: "Restaurant Management System",
+    image: "/projects/restaurant.png",
+    // ...
+}
+```
+
+The language mark moves to a small brass label beside the title once an image
+takes the slot.
+
+## Local development
 
 ```bash
 git clone https://github.com/xiangzhi2003/Portfolio.git
 cd Portfolio
 npm install
+npm run dev
 ```
 
-**Common commands**
-- `npm run dev` (local dev server)
-- `npm run build` (production build)
-- `npm run start` (serve production build)
-- `npm run lint` (lint)
+- `npm run dev` — dev server on http://localhost:3000
+- `npm run build` — production build
+- `npm run start` — serve the production build
+- `npm run lint` — lint
 
-## 🌐 Deployment (Vercel)
+## Deployment
 
-This repo is deployed on Vercel. Updating the website is simple:
+Pushes to `master` deploy automatically via Vercel.
 
-1. Edit the content/components (see paths below)
-2. `git commit` and `git push`
-3. Vercel redeploys automatically from the GitHub repo
+Optionally set `NEXT_PUBLIC_SITE_URL` on Vercel to the final domain — it's used
+for canonical and sitemap URLs.
 
-Optional: set `NEXT_PUBLIC_SITE_URL` on Vercel to your final domain (used for canonical + sitemap URLs).
+## Stack
 
-## 📝 Customization
+Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS 4 · lucide-react
 
-Update the following files to customize the portfolio:
+No animation libraries. Scroll behaviour is native CSS; reveals are a ~40-line
+IntersectionObserver component.
 
-- `src/home/ParallaxHero.tsx` - Name, title, social links
-- `src/about/content.ts` - Bio paragraphs
-- `src/skills/TechStack.tsx` - Skills and categories
-- `src/projects/Projects.tsx` - Project data
-- `src/timeline/Timeline.tsx` - Experience data
-- `src/contact/Contact.tsx` - Contact information
-- `public/profile.jpg` - Profile picture
+## License
 
-## 📄 License
+MIT. See `LICENSE`.
 
-MIT License. See `LICENSE`.
-
-## 🤝 Contact
+## Contact
 
 **Chiang Xiang Zhi**
 - Email: xiangzhichiang2003@gmail.com

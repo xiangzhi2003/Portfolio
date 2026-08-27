@@ -1,340 +1,217 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import {
-    Briefcase,
-    GraduationCap,
-    Award,
-    Users,
-    Calendar,
-    MapPin,
-    ArrowRight,
-    Shield,
-    LucideIcon,
-} from "lucide-react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Reveal } from "@/app/others/layout/Reveal";
+import { SectionRail } from "@/app/others/layout/SectionRail";
 
-interface Experience {
-    type: "work" | "education" | "achievement" | "activity";
+/*
+  A log, newest first. The year lives in the rail so the column of dates is
+  scannable on its own; the kind of entry is a word, not a coloured icon.
+*/
+type Kind = "Work" | "Education" | "Award" | "Activity";
+
+interface Entry {
+    kind: Kind;
+    period: string;
     title: string;
     organization: string;
     location?: string;
-    period: string;
     description: string;
-    skills: string[];
-    icon: LucideIcon;
-    color: string;
-    current: boolean;
+    /** Renders the brass "Current" pip. Set this on your role once you start one. */
+    current?: boolean;
 }
 
-const experiences: Experience[] = [
+const entries: Entry[] = [
     {
-        type: "work",
+        kind: "Education",
+        period: "Completed 2026",
+        title: "BSc (Hons) Software Engineering",
+        organization: "Asia Pacific University",
+        location: "Kuala Lumpur",
+        description:
+            "Software design, data structures, algorithms, and database systems. Completed with a 3.3 GPA; convocation pending.",
+    },
+    {
+        kind: "Activity",
+        period: "Until 2026",
+        title: "Committee Member",
+        organization: "OperationClub, APU",
+        description:
+            "Ran events and workshops for the club — planning, logistics, and getting a team of volunteers to the same page on the day.",
+    },
+    {
+        kind: "Work",
+        period: "Jul – Nov 2025",
         title: "Software Engineering Intern",
         organization: "IJM Corporation",
         location: "Malaysia",
-        period: "July 2025 - Nov 2025",
         description:
-            "Developing software solutions and collaborating with the engineering team on enterprise applications.",
-        skills: ["Flutter", "Dart", ".NET", "Agile"],
-        icon: Briefcase,
-        color: "from-blue-500 to-cyan-500",
-        current: true,
+            "Built internal applications with Flutter and .NET, working in the engineering team's Agile cycle from ticket to release.",
     },
     {
-        type: "education",
-        title: "BSc (Hons) Software Engineering",
-        organization: "Asia Pacific University (APU)",
-        location: "Kuala Lumpur",
-        period: "Current • GPA: 3.3",
-        description:
-            "Studying software engineering principles, data structures, algorithms, and modern development practices.",
-        skills: ["Software Design", "Algorithms", "Data Structures"],
-        icon: GraduationCap,
-        color: "from-purple-500 to-indigo-500",
-        current: true,
-    },
-    {
-        type: "activity",
-        title: "Committee Member",
-        organization: "OperationClub APU",
-        period: "Current",
-        description:
-            "Organizing events, workshops, and community initiatives. Developing leadership and teamwork skills.",
-        skills: ["Leadership", "Event Planning", "Teamwork"],
-        icon: Users,
-        color: "from-pink-500 to-rose-500",
-        current: true,
-    },
-    {
-        type: "achievement",
-        title: "Top 10 Finalist",
-        organization: "Joget NextGenHack 2024",
-        period: "2024",
-        description:
-            "Achieved Top 10 placement in a competitive hackathon showcasing innovative low-code solutions.",
-        skills: ["Low-Code", "Innovation", "Problem Solving"],
-        icon: Award,
-        color: "from-amber-500 to-orange-500",
-        current: false,
-    },
-    {
-        type: "work",
-        title: "Event Crew / Promoter",
-        organization: "Sime Darby, Guardian, IME, Sunway Pyramid, Astro & more",
+        kind: "Work",
+        period: "2022 – 2025",
+        title: "Event Crew & Promoter",
+        organization: "Sime Darby, Guardian, Astro, Sunway Pyramid",
         location: "Malaysia",
-        period: "2022 - 2025",
         description:
-            "Assisted in event setup, registration, and logistics. Promoted products and engaged customers at brand events. Provided product demonstrations and handled inquiries with strong communication skills.",
-        skills: ["Communication", "Customer Service", "Event Management"],
-        icon: Briefcase,
-        color: "from-teal-500 to-cyan-500",
-        current: false,
+            "Weekend brand activations — setup, registration, product demos, and handling customer questions directly on the floor.",
     },
     {
-        type: "work",
+        kind: "Award",
+        period: "2024",
+        title: "Top 10 Finalist",
+        organization: "Joget NextGenHack",
+        description:
+            "Placed in the top ten of a national low-code hackathon, building and pitching a working prototype under a weekend deadline.",
+    },
+    {
+        kind: "Work",
+        period: "Jun – Sep 2023",
         title: "Digital Marketing Intern",
         organization: "Cereals Project",
-        period: "June - Sept 2023",
         description:
-            "Managed social media campaigns, created engaging content, and analyzed metrics to optimize marketing strategies.",
-        skills: ["Social Media", "Content Creation", "Analytics"],
-        icon: Briefcase,
-        color: "from-green-500 to-emerald-500",
-        current: false,
+            "Ran social campaigns end to end: content, scheduling, and reading the metrics afterwards to decide what to change.",
     },
     {
-        type: "achievement",
-        title: "Honorable Mention Award",
-        organization: "International Kangaroo Math Competition",
-        period: "August 2020",
-        description:
-            "Received Honorable Mention in the prestigious international mathematics competition, demonstrating strong analytical and problem-solving abilities.",
-        skills: ["Mathematics", "Analytical Thinking", "Problem Solving"],
-        icon: Award,
-        color: "from-yellow-500 to-amber-500",
-        current: false,
-    },
-    {
-        type: "achievement",
-        title: "Safe Internet & Cybercrime Awareness Certificate",
-        organization: "Digi Yellow Heart, Bukit Kuning",
+        kind: "Award",
         period: "2020",
-        description:
-            "Completed certification program on internet safety, cybersecurity awareness, and digital responsibility.",
-        skills: ["Cybersecurity", "Digital Safety", "Awareness"],
-        icon: Shield,
-        color: "from-indigo-500 to-blue-500",
-        current: false,
+        title: "Honorable Mention",
+        organization: "International Kangaroo Math Competition",
+        description: "Recognised in the international round of the competition.",
     },
 ];
 
-const filters = [
-    { id: "all", label: "All" },
-    { id: "work", label: "Work" },
-    { id: "education", label: "Education" },
-    { id: "achievement", label: "Achievement" },
-    { id: "activity", label: "Activity" },
-] as const;
-
-type FilterType = (typeof filters)[number]["id"];
+const kinds: Kind[] = ["Work", "Education", "Award", "Activity"];
 
 export function Timeline() {
-    const [activeFilter, setActiveFilter] = useState<FilterType>("all");
+    const [filter, setFilter] = useState<Kind | "All">("All");
+    const tabsRef = useRef<HTMLDivElement>(null);
+    const [indicator, setIndicator] = useState({ left: 0, width: 0 });
 
-    const filteredExperiences =
-        activeFilter === "all"
-            ? experiences
-            : experiences.filter((exp) => exp.type === activeFilter);
+    // Measure the active tab so one shared underline can slide between them.
+    const measureIndicator = useCallback(() => {
+        const container = tabsRef.current;
+        if (!container) return;
 
-    const handleFilterChange = (filterId: FilterType) => {
-        setActiveFilter(filterId);
+        const activeTab = container.querySelector<HTMLElement>('[aria-selected="true"]');
+        if (!activeTab) return;
 
-        gsap.registerPlugin(ScrollTrigger);
-        setTimeout(() => {
-            ScrollTrigger.refresh();
-        }, 300);
-    };
+        setIndicator({
+            left: activeTab.offsetLeft,
+            width: activeTab.offsetWidth,
+        });
+    }, []);
+
+    useEffect(() => {
+        measureIndicator();
+        window.addEventListener("resize", measureIndicator);
+        return () => window.removeEventListener("resize", measureIndicator);
+    }, [measureIndicator, filter]);
+
+    // Counts come from the data, so a filter can never show an empty list.
+    const counts = useMemo(() => {
+        const tally = { All: entries.length } as Record<Kind | "All", number>;
+        for (const kind of kinds) {
+            tally[kind] = entries.filter((entry) => entry.kind === kind).length;
+        }
+        return tally;
+    }, []);
+
+    const available = useMemo(
+        () => (["All", ...kinds] as const).filter((kind) => counts[kind] > 0),
+        [counts],
+    );
+
+    const visible =
+        filter === "All" ? entries : entries.filter((entry) => entry.kind === filter);
 
     return (
-        <div className="relative py-24 px-6 overflow-hidden">
-            {/* Background */}
-            <div className="absolute inset-0 bg-slate-900/30" />
-            <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-3xl -translate-y-1/2" />
-            <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-purple-500/5 rounded-full blur-3xl" />
+        <section id="log" className="section">
+            <div className="shell section-grid">
+                <SectionRail label="Log" meta="Newest first" />
 
-            <div className="relative max-w-4xl mx-auto">
-                {/* Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-12"
-                >
-                    <motion.span
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        className="badge-green mb-4"
+                <div>
+                    {/* Filters: mono labels on a hairline, with one underline that slides. */}
+                    <div
+                        ref={tabsRef}
+                        role="tablist"
+                        aria-label="Filter log by kind"
+                        className="relative flex flex-wrap items-center gap-x-7 gap-y-2 border-b border-[var(--rule)] pb-4"
                     >
-                        My Journey
-                    </motion.span>
-                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                        Experience & <span className="gradient-text">Education</span>
-                    </h2>
-                    <p className="text-lg text-slate-300 max-w-2xl mx-auto">
-                        My professional journey and academic achievements
-                    </p>
-                </motion.div>
+                        {available.map((kind) => {
+                            const selected = filter === kind;
+                            return (
+                                <button
+                                    key={kind}
+                                    role="tab"
+                                    aria-selected={selected}
+                                    onClick={() => setFilter(kind)}
+                                    className={`label transition-colors ${selected
+                                        ? "text-[var(--accent)]"
+                                        : "hover:text-[var(--fg)]"
+                                        }`}
+                                >
+                                    {kind}
+                                    <span className="ml-1.5 opacity-60">{counts[kind]}</span>
+                                </button>
+                            );
+                        })}
 
-                {/* Filter Tabs */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="flex justify-center mb-12"
-                >
-                    <div className="inline-flex p-1.5 bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700/50">
-                        {filters.map((filter) => (
-                            <button
-                                key={filter.id}
-                                onClick={() => handleFilterChange(filter.id)}
-                                className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200 ${activeFilter === filter.id
-                                    ? "text-white"
-                                    : "text-slate-400 hover:text-slate-200"
-                                    }`}
+                        <span
+                            aria-hidden="true"
+                            className="pointer-events-none absolute -bottom-px h-0.5 bg-[var(--accent)]"
+                            style={{
+                                left: indicator.left,
+                                width: indicator.width,
+                                transition:
+                                    "left 340ms var(--ease), width 340ms var(--ease)",
+                            }}
+                        />
+                    </div>
+
+                    <div>
+                        {visible.map((entry, index) => (
+                            <Reveal
+                                key={`${entry.title}-${entry.period}`}
+                                delay={Math.min(index, 3) * 60}
                             >
-                                {activeFilter === filter.id && (
-                                    <motion.div
-                                        layoutId="activeFilterBg"
-                                        className="absolute inset-0 bg-blue-500 rounded-lg"
-                                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                                    />
-                                )}
-                                <span className="relative z-10">{filter.label}</span>
-                            </button>
+                                <article className="grid gap-2 border-b border-[var(--rule-soft)] py-7 md:grid-cols-[10rem_1fr] md:gap-8">
+                                    <div className="flex items-baseline gap-3 md:flex-col md:gap-1.5">
+                                        <p className="mono text-[var(--fg)]">{entry.period}</p>
+                                        <p className="label">{entry.kind}</p>
+                                    </div>
+
+                                    <div>
+                                        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                                            <h3 className="entry-title">{entry.title}</h3>
+                                            {entry.current && <span className="pip">Current</span>}
+                                        </div>
+
+                                        <p className="mt-1.5 text-[var(--fg-muted)]">
+                                            {entry.organization}
+                                            {entry.location && (
+                                                <span className="text-[var(--fg-faint)]">
+                                                    {" · "}
+                                                    {entry.location}
+                                                </span>
+                                            )}
+                                        </p>
+
+                                        <p className="prose-body mt-3">{entry.description}</p>
+                                    </div>
+                                </article>
+                            </Reveal>
                         ))}
                     </div>
-                </motion.div>
 
-                {/* Timeline */}
-                <div className="relative">
-                    <AnimatePresence mode="popLayout">
-                        <motion.div
-                            key={activeFilter}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="relative space-y-8"
-                        >
-                            {/* Vertical Line - now inside content so it matches height */}
-                            <div className="absolute left-8 md:left-10 top-8 bottom-8 w-px bg-blue-500" />
-                            {filteredExperiences.map((exp, index) => {
-                                const Icon = exp.icon;
-
-                                return (
-                                    <motion.div
-                                        key={`${exp.title}-${index}`}
-                                        initial={{ opacity: 0, x: -30 }}
-                                        whileInView={{ opacity: 1, x: 0 }}
-                                        transition={{ duration: 0.5, delay: index * 0.1 }}
-                                        viewport={{ once: true }}
-                                        className="relative flex gap-6 md:gap-8"
-                                    >
-                                        {/* Icon */}
-                                        <motion.div
-                                            whileHover={{ scale: 1.1 }}
-                                            className={`relative z-10 flex-shrink-0 w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br ${exp.color} rounded-2xl flex items-center justify-center shadow-lg`}
-                                        >
-                                            <Icon className="w-7 h-7 md:w-8 md:h-8 text-white" />
-                                        </motion.div>
-
-                                        {/* Card */}
-                                        <motion.div
-                                            whileHover={{ y: -4 }}
-                                            className="group flex-1 p-6 glass-card rounded-2xl transition-all duration-300 hover:border-slate-500/50 hover:shadow-lg hover:shadow-blue-500/5"
-                                        >
-                                            {/* Period Badge */}
-                                            <div className="flex flex-wrap items-center gap-2 mb-3">
-                                                <div className="flex items-center gap-1.5 text-slate-400">
-                                                    <Calendar className="w-4 h-4" />
-                                                    <span className="text-sm font-medium">
-                                                        {exp.period}
-                                                    </span>
-                                                </div>
-                                                {exp.location && (
-                                                    <>
-                                                        <span className="text-slate-600">•</span>
-                                                        <div className="flex items-center gap-1 text-slate-400">
-                                                            <MapPin className="w-3.5 h-3.5" />
-                                                            <span className="text-sm">{exp.location}</span>
-                                                        </div>
-                                                    </>
-                                                )}
-                                                {exp.current && (
-                                                    <>
-                                                        <span className="text-slate-600">•</span>
-                                                        <span className="px-2 py-0.5 text-xs font-medium bg-green-500/20 text-green-400 rounded-full">
-                                                            Current
-                                                        </span>
-                                                    </>
-                                                )}
-                                            </div>
-
-                                            {/* Title */}
-                                            <h3 className="text-xl font-bold text-white mb-1 group-hover:text-blue-300 transition-colors">
-                                                {exp.title}
-                                            </h3>
-
-                                            {/* Organization */}
-                                            <p className="text-blue-400 font-semibold mb-3">
-                                                {exp.organization}
-                                            </p>
-
-                                            {/* Description */}
-                                            <p className="text-slate-300 leading-relaxed mb-4">
-                                                {exp.description}
-                                            </p>
-
-                                            {/* Skill Tags */}
-                                            <div className="flex flex-wrap gap-2">
-                                                {exp.skills.map((skill) => (
-                                                    <span
-                                                        key={skill}
-                                                        className="px-2.5 py-1 text-xs font-medium bg-slate-800/80 text-slate-300 rounded-md border border-slate-700/50 hover:border-slate-600 hover:text-slate-200 transition-colors"
-                                                    >
-                                                        {skill}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </motion.div>
-                                    </motion.div>
-                                );
-                            })}
-                        </motion.div>
-                    </AnimatePresence>
+                    <div className="pt-8">
+                        <a href="/resume.pdf" download className="btn">
+                            Download resume (PDF)
+                        </a>
+                    </div>
                 </div>
-
-                {/* Resume CTA */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center mt-16"
-                >
-                    <a
-                        href="/resume.pdf"
-                        download
-                        className="group inline-flex items-center gap-2 text-blue-400 font-medium hover:text-blue-300 transition-colors"
-                    >
-                        View full resume
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </a>
-                </motion.div>
             </div>
-        </div>
+        </section>
     );
 }
