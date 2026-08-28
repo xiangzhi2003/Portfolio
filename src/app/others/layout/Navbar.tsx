@@ -64,7 +64,7 @@ export function Navbar() {
             <div className="flex h-16 items-center justify-between px-6 md:px-12">
                 <a
                     href="#home"
-                    className="font-mono text-[length:var(--text-label)] tracking-[0.2em] text-[var(--fg)] transition-colors hover:text-[var(--accent)]"
+                    className="-my-3 flex items-center py-3 font-mono text-[length:var(--text-label)] tracking-[0.2em] text-[var(--fg)] transition-colors hover:text-[var(--accent)]"
                 >
                     CXZ
                 </a>
@@ -87,7 +87,7 @@ export function Navbar() {
 
                 <button
                     onClick={() => setOpen((value) => !value)}
-                    className="-mr-2 p-2 text-[var(--fg-muted)] transition-colors hover:text-[var(--fg)] md:hidden"
+                    className="-mr-3 p-3 text-[var(--fg-muted)] transition-colors hover:text-[var(--fg)] md:hidden"
                     aria-label={open ? "Close menu" : "Open menu"}
                     aria-expanded={open}
                 >
@@ -106,7 +106,7 @@ export function Navbar() {
                             key={link.name}
                             href={link.href}
                             onClick={() => setOpen(false)}
-                            className={`label py-4 ${active === link.href.slice(1) ? "text-[var(--accent)]" : ""
+                            className={`label flex min-h-11 items-center py-3 ${active === link.href.slice(1) ? "text-[var(--accent)]" : ""
                                 }`}
                         >
                             {link.name}

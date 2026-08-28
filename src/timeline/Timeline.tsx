@@ -100,6 +100,15 @@ export function Timeline() {
         if (!activeTab) return;
 
         setIndicator({ left: activeTab.offsetLeft, width: activeTab.offsetWidth });
+
+        /*
+          The strip scrolls sideways when the tabs don't fit, so the selected one
+          can be off-screen. Scrolling the container directly rather than calling
+          scrollIntoView, which would also move the page vertically.
+        */
+        const target =
+            activeTab.offsetLeft - (container.clientWidth - activeTab.offsetWidth) / 2;
+        container.scrollTo({ left: Math.max(0, target), behavior: "smooth" });
     }, []);
 
     useEffect(() => {
@@ -132,7 +141,7 @@ export function Timeline() {
                     ref={tabsRef}
                     role="tablist"
                     aria-label="Filter log by kind"
-                    className="relative flex flex-wrap items-center gap-x-5 gap-y-1.5"
+                    className="filter-tabs"
                 >
                     {available.map((kind) => {
                         const selected = filter === kind;
@@ -142,7 +151,7 @@ export function Timeline() {
                                 role="tab"
                                 aria-selected={selected}
                                 onClick={() => setFilter(kind)}
-                                className={`label pb-1 transition-colors ${selected
+                                className={`label filter-tab ${selected
                                     ? "text-[var(--accent)]"
                                     : "hover:text-[var(--fg)]"
                                     }`}
@@ -155,12 +164,8 @@ export function Timeline() {
 
                     <span
                         aria-hidden="true"
-                        className="pointer-events-none absolute bottom-0 h-0.5 bg-[var(--accent)]"
-                        style={{
-                            left: indicator.left,
-                            width: indicator.width,
-                            transition: "left 340ms var(--ease), width 340ms var(--ease)",
-                        }}
+                        className="filter-indicator"
+                        style={{ left: indicator.left, width: indicator.width }}
                     />
                 </div>
             </SectionBar>

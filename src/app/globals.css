@@ -327,6 +327,77 @@ body {
 }
 
 /*
+  Below the breakpoint the meta takes its own full-width row under the section
+  name — five filter tabs never fit beside a heading on a phone. min-width: 0
+  lets the scroller inside it actually shrink.
+*/
+@media (max-width: 767px) {
+  .section-head-inner {
+    align-items: flex-start;
+  }
+
+  .section-head-meta {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+/* ------------------------------------------------------------- filters */
+
+/*
+  One non-wrapping row that scrolls sideways when it doesn't fit. Wrapping was
+  the bug: the sliding underline is positioned from the active tab's offsetLeft,
+  which is horizontal only, so once the tabs wrapped to a second line the
+  indicator stayed on the container's bottom edge under the wrong tab.
+*/
+.filter-tabs {
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 1.35rem;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.filter-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+/* A fade on the trailing edge, so it's visible there's more to scroll to. */
+@media (max-width: 767px) {
+  .filter-tabs {
+    -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent);
+    mask-image: linear-gradient(90deg, #000 88%, transparent);
+  }
+}
+
+/*
+  padding-block gets the hit area to the 44px minimum for touch. The label text
+  is only ~21px tall, which is well under what a thumb can reliably hit.
+*/
+.filter-tab {
+  flex-shrink: 0;
+  white-space: nowrap;
+  padding-block: 0.72rem;
+  transition: color 200ms var(--ease);
+}
+
+.filter-indicator {
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  background: var(--accent);
+  pointer-events: none;
+  transition:
+    left 340ms var(--ease),
+    width 340ms var(--ease);
+}
+
+/*
   Full-bleed column split with hairlines between columns. Below the breakpoint
   the columns stack and those vertical rules become horizontal ones, so the
   grid never leaves a border dangling in space.
