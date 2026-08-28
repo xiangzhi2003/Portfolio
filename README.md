@@ -32,9 +32,10 @@ Three rules hold it together:
   narrowing further to a readable measure — three width tiers, so the page has
   rhythm. The nav and the hero's availability strip run full width instead.
 - **The language mark.** Each project is stamped with the language it was built
-  in, set large in the display face. It stands in as the artwork in a project's
-  preview slot until a real screenshot exists — which is why there are no
-  per-project gradients or decorative icons.
+  in, set large in the display face, and Work carries **one project per
+  language** — so that stamp means something rather than decorating. It also
+  stands in as the artwork in a project's preview slot until a real screenshot
+  exists, which is why there are no per-project gradients or decorative icons.
 
 Type is Archivo (display), Instrument Sans (body), and JetBrains Mono (every
 label, year, and count), sized once as tokens in `globals.css` — no
@@ -90,9 +91,16 @@ All content is plain data at the top of its section file:
 | Colours, type sizes, spacing, speed | the **ADJUST ME** block at the top of `src/app/globals.css` |
 | Profile photo, resume | `public/profile.jpg`, `public/resume.pdf` |
 
-Adding an `href` to a project puts a "View source" link inside its expanded
-panel. (It can't wrap the row itself — the row is the expand/collapse button,
-and an anchor inside a button is invalid HTML.)
+Every project's `title`, `description`, and `stack` is taken from its GitHub
+README rather than written from memory — an earlier version of this list had
+drifted and claimed behaviour the code did not have.
+
+`href` adds a "View source" link inside the expanded panel, and `demo` adds a
+"Live demo" link plus a green marker on the collapsed row. **Verify a `demo` URL
+returns 200 before adding it** — two of the deploy URLs recorded in these repos
+now 404, and a dead link is worse than none. (Neither link can wrap the row
+itself: the row is the expand/collapse button, and an anchor inside a button is
+invalid HTML.)
 
 ### Common adjustments
 
@@ -123,8 +131,8 @@ language mark, so the layout is the same either way:
 
 ```ts
 {
-    title: "Restaurant Management System",
-    image: "/projects/restaurant.png",
+    title: "UniLink",
+    image: "/projects/unilink.png",
     // ...
 }
 ```

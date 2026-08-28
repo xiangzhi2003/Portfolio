@@ -695,6 +695,27 @@ body {
   color: var(--fg);
 }
 
+/*
+  "Live" marker beside the platform, for a project with a working deployment.
+  Sits inside the existing platform cell rather than taking a grid column of its
+  own, so the five-column alignment down the list is untouched.
+*/
+.work-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-left: 0.6rem;
+  color: var(--accent);
+}
+
+.work-live::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
 .work-panel {
   padding: 0 1.5rem 2rem;
 }

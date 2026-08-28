@@ -13,18 +13,49 @@ import { SectionBar } from "@/app/others/layout/SectionBar";
   --marquee-speed pixels per second regardless of how wide the content is.
   It keeps moving under reduced motion by deliberate exception; see globals.css.
 */
+/*
+  Kept honest against the repositories in Work — TypeScript, PostgreSQL, AWS and
+  the React side were all in use there but missing from this list.
+*/
 const groups = [
     {
         name: "Languages",
-        items: ["C#", "Java", "Dart", "Python", "JavaScript", "C++", "R", "SQL"],
+        items: [
+            "C#",
+            "Java",
+            "Dart",
+            "Python",
+            "TypeScript",
+            "JavaScript",
+            "C++",
+            "R",
+            "SQL",
+        ],
     },
     {
         name: "Frameworks",
-        items: [".NET", "Flutter", "WinForms", "Node.js"],
+        items: [
+            "ASP.NET Core",
+            "Flutter",
+            "Next.js",
+            "React",
+            "FastAPI",
+            "Node.js",
+            "WinForms",
+            "Tailwind",
+        ],
     },
     {
-        name: "Data",
-        items: ["Microsoft SQL Server", "Firebase", "MySQL"],
+        name: "Data & cloud",
+        items: [
+            "PostgreSQL",
+            "Microsoft SQL Server",
+            "MySQL",
+            "Firebase",
+            "Supabase",
+            "AWS",
+            "Docker",
+        ],
     },
     {
         name: "Tooling",
