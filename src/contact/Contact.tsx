@@ -26,7 +26,7 @@ export function Contact() {
     return (
         <>
             <section id="contact" className="section contours" data-band="alt">
-                <SectionBar number="05" label="Contact" />
+                <SectionBar label="Contact" />
 
                 <div className="split">
                     <div>

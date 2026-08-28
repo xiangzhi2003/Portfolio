@@ -59,7 +59,9 @@ export function Navbar() {
                 : "bg-transparent"
                 }`}
         >
-            <div className="frame flex h-16 items-center justify-between px-6 md:px-12">
+            {/* Full width, not framed: the logo sits hard left and the links hard
+                right, so the bar spans the page instead of floating centred. */}
+            <div className="flex h-16 items-center justify-between px-6 md:px-12">
                 <a
                     href="#home"
                     className="font-mono text-[length:var(--text-label)] tracking-[0.2em] text-[var(--fg)] transition-colors hover:text-[var(--accent)]"
@@ -98,7 +100,7 @@ export function Navbar() {
                 className={`overflow-hidden bg-[var(--bg)] transition-[max-height] duration-300 ease-out md:hidden ${open ? "max-h-96" : "max-h-0"
                     }`}
             >
-                <div className="frame flex flex-col px-6 py-2 md:px-12">
+                <div className="flex flex-col px-6 py-2 md:px-12">
                     {links.map((link) => (
                         <a
                             key={link.name}

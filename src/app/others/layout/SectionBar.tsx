@@ -1,28 +1,26 @@
 import type { ReactNode } from "react";
 
 interface SectionBarProps {
-    /** Two-digit index, e.g. "01". */
-    number: string;
     label: string;
     /** Right-hand side: a count, a sort order, or filter controls. */
     children?: ReactNode;
+    /**
+     * Drop the centred frame so the header lines up with full-width content.
+     * Framed by default, matching the rest of the page.
+     */
+    wide?: boolean;
 }
 
 /**
- * The header that opens every section: an accent index above the section name
- * set in display type, with any meta or controls aligned to its baseline on the
- * right. Its rule spans the viewport while the content sits in the frame.
- *
- * Purely presentational — no state, no scroll listener, no client boundary.
+ * The header that opens a section: the name in the accent, with any meta or
+ * controls aligned opposite it. Purely presentational — no state, no client
+ * boundary.
  */
-export function SectionBar({ number, label, children }: SectionBarProps) {
+export function SectionBar({ label, children, wide = false }: SectionBarProps) {
     return (
         <div className="section-head">
-            <div className="section-head-inner frame">
-                <div className="section-head-title">
-                    <span className="section-index">{number}</span>
-                    <h2 className="section-title">{label}</h2>
-                </div>
+            <div className={`section-head-inner ${wide ? "" : "frame"}`}>
+                <h2 className="section-title">{label}</h2>
 
                 {children && <div className="section-head-meta">{children}</div>}
             </div>

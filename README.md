@@ -16,16 +16,21 @@ presented like an engineering spec sheet rather than a landing page.
 
 Three rules hold it together:
 
-- **One accent.** Acid green (`#bcff3a`) on a near-black ground, used only for
-  live state, section indices, links, and hover. Every text colour is checked
+- **One accent.** Acid green (`#bcff3a`) on a near-black ground, used for
+  section names, live state, links, and hover. Every text colour is checked
   against **both** section bands for WCAG AA — the lighter band is the harder
   case, and it's what catches values that only pass on the darker one.
-- **Separation by space, not lines.** There is effectively one border on the
-  whole page (the pull-quote's accent bar). Sections are divided by an
-  alternating band and a large block of vertical air; rows, tags, badges, and
-  buttons are raised filled surfaces rather than outlined boxes. Content sits in
-  a centred frame while backgrounds run edge to edge, and prose narrows further
-  to a readable measure — three width tiers, so the page has rhythm.
+- **No pure greys.** Every neutral carries a trace of the accent's hue (~79°),
+  so the palette reads as one family. Pure `#1c1c1c`-style greys next to a
+  saturated accent make the accent look stuck on rather than belonging. Keep
+  any neutral you add on the same hue.
+- **Separation by space, not lines.** Sections are divided by an alternating
+  band and vertical air; rows, tags, badges, and buttons are raised filled
+  surfaces rather than outlined boxes. Lines survive in exactly two places, both
+  deliberate: the pull-quote's accent bar and the stack's row dividers. Content
+  sits in a centred frame while backgrounds run edge to edge, with prose
+  narrowing further to a readable measure — three width tiers, so the page has
+  rhythm. The nav and the hero's availability strip run full width instead.
 - **The language mark.** Each project is stamped with the language it was built
   in, set large in the display face. It stands in as the artwork in a project's
   preview slot until a real screenshot exists — which is why there are no
@@ -59,12 +64,12 @@ src/
 │   ├── robots.ts, sitemap.ts
 │   └── others/layout/
 │       ├── Navbar.tsx          nav + scroll spy
-│       ├── SectionBar.tsx      numbered section header
+│       ├── SectionBar.tsx      section header (name + meta)
 │       └── Reveal.tsx          scroll reveals
 ├── home/Hero.tsx               status strip, name, fact grid
 ├── about/About.tsx, content.ts pull-quote | bio split
 ├── projects/Projects.tsx       expandable work rows
-├── skills/TechStack.tsx        ticker + category grid
+├── skills/TechStack.tsx        ticker + lined category list
 ├── timeline/Timeline.tsx       log
 └── contact/Contact.tsx         contact + footer
 ```

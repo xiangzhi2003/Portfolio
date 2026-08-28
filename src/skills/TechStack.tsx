@@ -106,36 +106,25 @@ function Ticker() {
 export function TechStack() {
     return (
         <section id="stack" className="section" data-band="alt">
-            <SectionBar number="03" label="Stack">
+            <SectionBar label="Stack">
                 <span className="label">{total} technologies</span>
             </SectionBar>
 
             <Ticker />
 
-            <div className="split-4">
+            {/* A lined list: category name in the accent, its technologies beside it. */}
+            <div className="stack-list">
                 {groups.map((group, index) => (
                     <Reveal key={group.name} delay={Math.min(index, 3) * 60}>
-                        <div className="flex items-baseline gap-2">
-                            <h3 className="bracket">{group.name}</h3>
-                            <span className="mono text-[var(--fg-faint)]">
-                                {group.items.length}
-                            </span>
-                        </div>
+                        <div className="stack-row">
+                            <h3 className="stack-name">{group.name}</h3>
 
-                        <ul className="mt-5 space-y-2.5">
-                            {group.items.map((item) => (
-                                <li
-                                    key={item}
-                                    className="flex items-center gap-3 text-[var(--fg-muted)]"
-                                >
-                                    <span
-                                        className="h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--rule)]"
-                                        aria-hidden="true"
-                                    />
-                                    {item}
-                                </li>
-                            ))}
-                        </ul>
+                            <ul className="stack-items">
+                                {group.items.map((item) => (
+                                    <li key={item}>{item}</li>
+                                ))}
+                            </ul>
+                        </div>
                     </Reveal>
                 ))}
             </div>

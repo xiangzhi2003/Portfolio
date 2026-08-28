@@ -28,9 +28,9 @@ const facts = [
 export function Hero() {
     return (
         <header id="home" className="hero">
-            {/* Availability strip — content aligns to the frame */}
+            {/* Availability hard left, location hard right, spanning the page. */}
             <div className="status-strip rise" style={{ animationDelay: "0ms" }}>
-                <div className="status-strip-inner frame">
+                <div className="status-strip-inner">
                     <span className="label flex items-center gap-2.5 text-[var(--fg)]">
                         <span className="dot" aria-hidden="true" />
                         Available for work

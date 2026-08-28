@@ -1,14 +1,20 @@
 import { Reveal } from "@/app/others/layout/Reveal";
-import { SectionBar } from "@/app/others/layout/SectionBar";
 import { aboutFacts, aboutParagraphs, aboutQuote } from "@/about/content";
 
 export function About() {
     // The hover texture lives on the section, not the framed content inside it,
     // so it fills the full viewport width instead of stopping at the frame edge.
+    //
+    // No section header here: the bracket labels below already say what each
+    // column is, so a heading was just repeating itself. This section also runs
+    // shorter than the rest, since it carries less to read.
     return (
-        <section id="about" className="section hover-texture" data-band="alt">
-            <SectionBar number="01" label="About" />
-
+        <section
+            id="about"
+            className="section hover-texture"
+            data-band="alt"
+            data-size="sm"
+        >
             {/* Philosophy left, background right, separated by space. */}
             <div className="split">
                 <div>

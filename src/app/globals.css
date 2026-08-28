@@ -16,29 +16,34 @@
      Ground and body text are the source design's own values. Raise --bg
      to lighten the page.
      ---------------------------------------------------------------- */
-  --bg: #0a0a0a; /* page                        */
-  --bg-alt: #1c1c1c; /* alternating section bands   */
-  --bg-sunken: #131313; /* wells behind previews       */
+  /*
+    These are not pure greys. Each carries a trace of the accent's hue (~79°),
+    which is what makes the page feel like one palette instead of grey with a
+    green sticker on it. Keep any new neutral on the same hue.
+  */
+  --bg: #0b0b09; /* page                        */
+  --bg-alt: #1d1e1a; /* alternating section bands   */
+  --bg-sunken: #10110e; /* wells behind previews       */
 
   /*
     Text. Ratios are against --bg / --bg-alt, the lighter band being the harder
     case. Keep every one ≥ 4.5:1.
   */
-  --fg: #efefef; /* 17.2 / 14.8 — headings, key text */
-  --fg-muted: #999999; /*  7.0 /  6.0 — body copy          */
-  --fg-faint: #8a8a8a; /*  5.7 /  4.9 — labels, captions   */
+  --fg: #f0f2ee; /* 17.5 / 14.9 — headings, key text */
+  --fg-muted: #a1a597; /*  7.8 /  6.7 — body copy          */
+  --fg-faint: #8f9484; /*  6.3 /  5.4 — labels, captions   */
 
   /*
     Separation comes from space and raised surfaces, not outlines. These two
     survive for the rare place a line genuinely helps; if you find yourself
     reaching for them often, add space instead.
   */
-  --rule: #6a6a6a; /* only where a line is truly needed */
-  --rule-soft: #2a2a2a; /* barely-there seam                 */
+  --rule: #6e7364; /* 4.0 on --bg — only where a line is truly needed */
+  --rule-soft: #2c2e28; /* barely-there seam, same hue as everything else  */
 
   /* Raised surfaces — how things separate now that the borders are gone. */
-  --surface: #161616; /* a card sitting on --bg     */
-  --surface-alt: #272727; /* a card sitting on --bg-alt */
+  --surface: #151613; /* a card sitting on --bg     */
+  --surface-alt: #2a2c26; /* a card sitting on --bg-alt */
   --radius: 14px;
 
   /* The single accent, from the source design. 16.5 / 14.2. */
@@ -46,7 +51,7 @@
   --accent-deep: #8ee000; /* the source's gradient end — used for pressed/hover fills */
 
   /* Hover wash — a light lift, readable over both bands */
-  --wash: rgba(255, 255, 255, 0.045);
+  --wash: rgba(240, 242, 238, 0.05);
 
   /* ---- Type scale ------------------------------------------------
      Deliberately wide steps: small things are properly small, big
@@ -137,7 +142,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333333;
+  background: #34362f;
   border: 3px solid var(--bg-alt);
   border-radius: 5px;
 }
@@ -227,13 +232,24 @@ body {
 */
 .section {
   position: relative;
-  padding-block: 5.5rem;
+  padding-block: 4rem;
   scroll-margin-top: 4rem;
 }
 
 @media (min-width: 768px) {
   .section {
-    padding-block: 8.5rem;
+    padding-block: 6rem;
+  }
+}
+
+/* A shorter section, for one that carries less to read. */
+.section[data-size="sm"] {
+  padding-block: 3rem;
+}
+
+@media (min-width: 768px) {
+  .section[data-size="sm"] {
+    padding-block: 4.25rem;
   }
 }
 
@@ -260,7 +276,7 @@ body {
 
 /* Content grids align to the frame; their section's rules do not. */
 .split,
-.split-4 {
+.stack-list {
   max-width: var(--frame);
   margin-inline: auto;
 }
@@ -278,36 +294,21 @@ body {
   justify-content: space-between;
   gap: 0.75rem 2rem;
   padding-inline: 1.5rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 @media (min-width: 768px) {
   .section-head-inner {
     padding-inline: 3rem;
-    margin-bottom: 4rem;
+    margin-bottom: 2.5rem;
   }
 }
 
 /*
-  Index, rule, name — one compact line. The hierarchy comes from colour and
-  weight rather than size: the page already has one piece of large type (the
-  name), and five more would shout over it.
+  The section name, in the accent. The hierarchy comes from colour rather than
+  size: the page already has one piece of large type (the name in the hero),
+  and five more headings would shout over it.
 */
-.section-head-title {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-}
-
-.section-index {
-  font-family: var(--font-mono), monospace;
-  font-size: var(--text-label);
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: 0.18em;
-  color: var(--accent);
-}
-
 .section-title {
   font-family: var(--font-mono), monospace;
   font-size: var(--text-label);
@@ -315,7 +316,7 @@ body {
   line-height: 1;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--fg);
+  color: var(--accent);
 }
 
 .section-head-meta {
@@ -336,35 +337,68 @@ body {
 }
 
 .split {
-  gap: 3.5rem;
+  gap: 2.5rem;
   padding-inline: 1.5rem;
 }
 
 @media (min-width: 768px) {
   .split {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 5rem;
+    gap: 3.5rem;
     padding-inline: 3rem;
   }
 }
 
-/* Four-up variant — the stack's category grid. Two columns, then four. */
-.split-4 {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.split-4 {
-  gap: 2.5rem;
+.stack-list {
   padding-inline: 1.5rem;
 }
 
-@media (min-width: 900px) {
-  .split-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 3rem;
+@media (min-width: 768px) {
+  .stack-list {
     padding-inline: 3rem;
   }
+}
+
+/*
+  The stack reads as a lined list: category name in the accent on the left, its
+  technologies on the right, a hairline between each row.
+*/
+.stack-row {
+  display: grid;
+  gap: 0.6rem;
+  padding-block: 1.35rem;
+  border-top: 1px solid var(--rule);
+}
+
+/* No rule above the first row — it would float under the section header. */
+.stack-list > *:first-child .stack-row {
+  border-top: 0;
+}
+
+@media (min-width: 768px) {
+  .stack-row {
+    grid-template-columns: 11rem minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: baseline;
+    padding-block: 1.6rem;
+  }
+}
+
+.stack-name {
+  font-family: var(--font-mono), monospace;
+  font-size: var(--text-label);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.stack-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.6rem;
+  color: var(--fg-muted);
 }
 
 .rule {
@@ -400,6 +434,88 @@ body {
   itself is the button, so a repo link lives inside the expanded panel rather
   than nesting an anchor inside a button.
 */
+/*
+  Card lists are inset by the same gutter the section headers use, so a card's
+  left edge lines up with its section title instead of running wider than it.
+*/
+.list-inset {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .list-inset {
+    padding-inline: 3rem;
+  }
+}
+
+/*
+  Collapsed row. Stacked on small screens; on wide ones a five-column grid so
+  index, title, tags, platform, and toggle line up down the entire list — the
+  thing that makes a full-width index read as set rather than stretched.
+*/
+.work-grid {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 0.9rem 1rem;
+}
+
+.work-index {
+  grid-column: 1;
+  padding-top: 0.5rem;
+}
+
+.work-title {
+  grid-column: 2;
+}
+
+.work-sign {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.work-tags {
+  grid-column: 2 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.work-platform {
+  grid-column: 2 / -1;
+}
+
+@media (min-width: 1024px) {
+  .work-grid {
+    grid-template-columns:
+      3.5rem minmax(0, 1.15fr) minmax(0, 1fr)
+      7rem 2rem;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .work-index {
+    padding-top: 0;
+  }
+
+  .work-tags {
+    grid-column: 3;
+  }
+
+  .work-platform {
+    grid-column: 4;
+    justify-self: start;
+  }
+
+  .work-sign {
+    grid-column: 5;
+    justify-self: end;
+  }
+}
+
 /* Each project is a raised card, separated by space rather than a rule. */
 .work-row {
   background: var(--surface);
@@ -410,10 +526,6 @@ body {
 
 .section[data-band="alt"] .work-row {
   background: var(--surface-alt);
-}
-
-.work-row + .work-row {
-  margin-top: 0.75rem;
 }
 
 .work-toggle {
@@ -432,7 +544,7 @@ body {
 }
 
 .work-row:hover {
-  background: #1d1d1d;
+  background: #1e2019;
 }
 
 .work-index {
@@ -465,7 +577,7 @@ body {
   width: 2rem;
   height: 2rem;
   flex-shrink: 0;
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(240, 242, 238, 0.07);
   border-radius: 999px;
   font-family: var(--font-mono), monospace;
   font-size: var(--text-meta);
@@ -517,7 +629,7 @@ body {
 }
 
 .log-row:hover {
-  background: #1d1d1d;
+  background: #1e2019;
 }
 
 .log-row:hover .entry-title,
@@ -695,7 +807,7 @@ body {
   letter-spacing: 0.02em;
   color: var(--fg-muted);
   padding: 0.3rem 0.7rem;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(240, 242, 238, 0.06);
   border-radius: 999px;
   transition:
     background-color 220ms var(--ease),
@@ -718,7 +830,7 @@ body {
   text-transform: uppercase;
   white-space: nowrap;
   padding: 0.22rem 0.6rem;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(240, 242, 238, 0.06);
   border-radius: 999px;
   color: var(--fg-faint);
   transition:
@@ -749,7 +861,7 @@ body {
 }
 
 .card:hover {
-  background: #2f2f2f;
+  background: #333529;
 }
 
 .card-arrow {
@@ -808,7 +920,7 @@ body {
   border-radius: 999px;
   border: 0;
   color: var(--fg);
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(240, 242, 238, 0.08);
   transition:
     background-color 200ms var(--ease),
     border-color 200ms var(--ease),

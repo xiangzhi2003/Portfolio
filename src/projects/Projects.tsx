@@ -87,11 +87,11 @@ export function Projects() {
 
     return (
         <section id="work" className="section">
-            <SectionBar number="02" label="Work">
+            <SectionBar label="Work">
                 <span className="label">{projects.length} projects</span>
             </SectionBar>
 
-            <div className="frame">
+            <div className="frame list-inset">
                 {projects.map((project, index) => {
                     const isOpen = open === project.title;
                     const panelId = `work-panel-${index}`;
@@ -106,38 +106,40 @@ export function Projects() {
                                     aria-controls={panelId}
                                     onClick={() => setOpen(isOpen ? null : project.title)}
                                 >
-                                    <div className="flex items-start justify-between gap-5">
-                                        <div className="flex min-w-0 items-start gap-4 md:gap-6">
-                                            <span className="work-index pt-2.5">
-                                                [{String(index + 1).padStart(2, "0")}]
-                                            </span>
+                                    {/*
+                                      A grid, not a flex row: at full width the
+                                      columns line up down the whole list, so it
+                                      reads as a set index rather than six rows
+                                      that each happen to stretch.
+                                    */}
+                                    <div className="work-grid">
+                                        <span className="work-index">
+                                            [{String(index + 1).padStart(2, "0")}]
+                                        </span>
 
-                                            <div className="min-w-0">
-                                                <h3 className="work-title">{project.title}</h3>
-                                                <ul className="mt-3.5 flex flex-wrap gap-2">
-                                                    {project.stack.map((item) => (
-                                                        <li key={item} className="tag">
-                                                            {item}
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                        </div>
+                                        <h3 className="work-title">{project.title}</h3>
 
-                                        <div className="flex shrink-0 items-center gap-4 pt-1.5 md:gap-6">
-                                            <span className="label hidden sm:block">
-                                                {project.platform}
-                                            </span>
-                                            <span className="work-sign" aria-hidden="true">
-                                                {isOpen ? "−" : "+"}
-                                            </span>
-                                        </div>
+                                        <ul className="work-tags">
+                                            {project.stack.map((item) => (
+                                                <li key={item} className="tag">
+                                                    {item}
+                                                </li>
+                                            ))}
+                                        </ul>
+
+                                        <span className="label work-platform">
+                                            {project.platform}
+                                        </span>
+
+                                        <span className="work-sign" aria-hidden="true">
+                                            {isOpen ? "−" : "+"}
+                                        </span>
                                     </div>
                                 </button>
 
                                 {isOpen && (
                                     <div id={panelId} className="work-panel">
-                                        <div className="flex flex-col gap-6 md:flex-row md:items-start md:gap-8">
+                                        <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-7">
                                             <div className="preview">
                                                 {project.image ? (
                                                     <Image
@@ -159,10 +161,7 @@ export function Projects() {
                                             </div>
 
                                             <div className="min-w-0 flex-1">
-                                                <p className="bracket sm:hidden">
-                                                    {project.platform}
-                                                </p>
-                                                <p className="prose-body mt-3 sm:mt-0">
+                                                <p className="prose-body">
                                                     {project.description}
                                                 </p>
 

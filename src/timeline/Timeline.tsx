@@ -127,7 +127,7 @@ export function Timeline() {
 
     return (
         <section id="log" className="section">
-            <SectionBar number="04" label="Log">
+            <SectionBar label="Log">
                 <div
                     ref={tabsRef}
                     role="tablist"
@@ -165,14 +165,14 @@ export function Timeline() {
                 </div>
             </SectionBar>
 
-            <div className="frame">
+            <div className="frame list-inset">
                 {visible.map((entry, index) => (
                     <Reveal
                         key={`${entry.title}-${entry.period}`}
                         delay={Math.min(index, 3) * 60}
                     >
                         <article
-                            className="log-row mt-3 grid gap-4 px-6 py-7 first:mt-0 md:grid-cols-[13rem_1fr] md:gap-0 md:px-8"
+                            className="log-row grid gap-4 px-6 py-7 md:grid-cols-[13rem_1fr] md:gap-0 md:px-8"
                         >
                             <div className="flex flex-wrap items-center gap-3 md:flex-col md:items-start md:gap-3 md:pr-8">
                                 <p className="log-period mono text-[var(--fg)]">
