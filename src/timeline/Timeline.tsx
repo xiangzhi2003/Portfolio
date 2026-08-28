@@ -117,6 +117,47 @@ export function Timeline() {
         return () => window.removeEventListener("resize", measureIndicator);
     }, [measureIndicator, filter]);
 
+    /*
+      Which edges of the tab strip get a fade. It has to follow the scroll
+      position: a fade that is always on the trailing edge dims the last tab's
+      count once you have scrolled all the way to it.
+    */
+    const [fade, setFade] = useState<"none" | "start" | "end" | "both">("none");
+
+    useEffect(() => {
+        const el = tabsRef.current;
+        if (!el) return;
+
+        let frame = 0;
+
+        const measure = () => {
+            frame = 0;
+            const max = el.scrollWidth - el.clientWidth;
+            if (max <= 1) {
+                setFade("none");
+                return;
+            }
+            const atStart = el.scrollLeft <= 1;
+            const atEnd = el.scrollLeft >= max - 1;
+            setFade(atStart ? "end" : atEnd ? "start" : "both");
+        };
+
+        const schedule = () => {
+            if (frame) return;
+            frame = requestAnimationFrame(measure);
+        };
+
+        schedule();
+        el.addEventListener("scroll", schedule, { passive: true });
+        window.addEventListener("resize", schedule, { passive: true });
+
+        return () => {
+            if (frame) cancelAnimationFrame(frame);
+            el.removeEventListener("scroll", schedule);
+            window.removeEventListener("resize", schedule);
+        };
+    }, []);
+
     // Counts come from the data, so a filter can never show an empty list.
     const counts = useMemo(() => {
         const tally = { All: entries.length } as Record<Kind | "All", number>;
@@ -142,6 +183,7 @@ export function Timeline() {
                     role="tablist"
                     aria-label="Filter log by kind"
                     className="filter-tabs"
+                    data-fade={fade}
                 >
                     {available.map((kind) => {
                         const selected = filter === kind;
