@@ -68,8 +68,8 @@ export const metadata: Metadata = {
  * light-only so browsers don't auto-invert it into a dark theme.
  */
 export const viewport: Viewport = {
-  themeColor: "#eae6db",
-  colorScheme: "light",
+  themeColor: "#0a0a0a",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({

@@ -1,20 +1,23 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import { Github, ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/app/others/layout/Reveal";
-import { SectionRail } from "@/app/others/layout/SectionRail";
+import { SectionBar } from "@/app/others/layout/SectionBar";
 
 /*
-  Each project is identified by the language it was built in, not by a colour
-  or an icon. Scrolling the section reads as C# → Flutter → Java → Python →
-  C++ → R, which is the honest through-line: the same class of problem solved
-  in whatever the problem called for.
+  Each project is a numbered row that expands. Collapsed, all six are scannable
+  at once; open, a row shows its screenshot and description.
 
-  Every row has a preview slot. Until a screenshot exists, that slot holds the
-  language mark — so the layout is identical whether or not there's an image,
-  and adding one is a one-line change.
+  The preview slot holds the language mark until a real screenshot exists, so
+  the layout is identical either way and adding one is a one-line change:
 
     image: "/projects/restaurant.png"   drop the file in public/projects/
-    href:  "https://github.com/..."     makes the whole row a link
+    href:  "https://github.com/..."     adds a source link inside the panel
+
+  No `year` field: the real dates aren't known, and inventing them would put
+  false information in front of recruiters. `platform` fills that slot instead.
 */
 interface Project {
     title: string;
@@ -78,111 +81,127 @@ const projects: Project[] = [
     },
 ];
 
-function Tile({ project }: { project: Project }) {
-    return (
-        <>
-            <div className="preview">
-                {project.image ? (
-                    <Image
-                        src={project.image}
-                        alt={`${project.title} screenshot`}
-                        fill
-                        sizes="(max-width: 640px) 100vw, 28rem"
-                        className="object-cover"
-                    />
-                ) : (
-                    // No screenshot yet — the language mark is the artwork.
-                    <span className="language-mark" aria-hidden="true">
-                        {project.language}
-                    </span>
-                )}
-            </div>
-
-            <div className="tile-body">
-                <div className="flex items-center justify-between gap-3">
-                    <p className="label">{project.platform}</p>
-                    <p className="label text-[var(--accent)]">{project.language}</p>
-                </div>
-
-                <h3 className="tile-title mt-3 flex items-start gap-2">
-                    {project.title}
-                    {project.href && (
-                        <ArrowUpRight
-                            className="mt-1.5 h-4 w-4 shrink-0 text-[var(--fg-faint)]"
-                            strokeWidth={2}
-                        />
-                    )}
-                </h3>
-
-                <p className="prose-body mt-3 text-[length:var(--text-ui)]">
-                    {project.description}
-                </p>
-
-                <ul className="mt-auto flex flex-wrap gap-2 pt-5">
-                    {project.stack.map((item) => (
-                        <li key={item} className="tag">
-                            {item}
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        </>
-    );
-}
-
 export function Projects() {
+    // The first row starts open so the expand affordance is visible without a click.
+    const [open, setOpen] = useState<string | null>(projects[0].title);
+
     return (
         <section id="work" className="section">
-            <div className="shell section-grid">
-                <SectionRail label="Work" meta={`${projects.length} projects`} alignToText />
+            <SectionBar number="02" label="Work">
+                <span className="label">{projects.length} projects</span>
+            </SectionBar>
 
-                <div>
-                    <Reveal>
-                        <p className="prose-body">
-                            Each one solves an operational problem for a real kind of
-                            business, built in whatever the problem called for.
-                        </p>
-                    </Reveal>
+            <div className="frame">
+                {projects.map((project, index) => {
+                    const isOpen = open === project.title;
+                    const panelId = `work-panel-${index}`;
 
-                    <div className="tile-grid mt-10">
-                        {projects.map((project, index) => (
-                            <Reveal
-                                key={project.title}
-                                delay={Math.min(index, 3) * 70}
-                                className="h-full"
-                            >
-                                {project.href ? (
-                                    <a
-                                        href={project.href}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="tile h-full"
-                                    >
-                                        <Tile project={project} />
-                                    </a>
-                                ) : (
-                                    <article className="tile h-full">
-                                        <Tile project={project} />
-                                    </article>
+                    return (
+                        <Reveal key={project.title} delay={Math.min(index, 3) * 60}>
+                            <div className="work-row" data-open={isOpen}>
+                                <button
+                                    type="button"
+                                    className="work-toggle"
+                                    aria-expanded={isOpen}
+                                    aria-controls={panelId}
+                                    onClick={() => setOpen(isOpen ? null : project.title)}
+                                >
+                                    <div className="flex items-start justify-between gap-5">
+                                        <div className="flex min-w-0 items-start gap-4 md:gap-6">
+                                            <span className="work-index pt-2.5">
+                                                [{String(index + 1).padStart(2, "0")}]
+                                            </span>
+
+                                            <div className="min-w-0">
+                                                <h3 className="work-title">{project.title}</h3>
+                                                <ul className="mt-3.5 flex flex-wrap gap-2">
+                                                    {project.stack.map((item) => (
+                                                        <li key={item} className="tag">
+                                                            {item}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex shrink-0 items-center gap-4 pt-1.5 md:gap-6">
+                                            <span className="label hidden sm:block">
+                                                {project.platform}
+                                            </span>
+                                            <span className="work-sign" aria-hidden="true">
+                                                {isOpen ? "−" : "+"}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </button>
+
+                                {isOpen && (
+                                    <div id={panelId} className="work-panel">
+                                        <div className="flex flex-col gap-6 md:flex-row md:items-start md:gap-8">
+                                            <div className="preview">
+                                                {project.image ? (
+                                                    <Image
+                                                        src={project.image}
+                                                        alt={`${project.title} screenshot`}
+                                                        fill
+                                                        sizes="(max-width: 768px) 100vw, 22rem"
+                                                        className="object-cover"
+                                                    />
+                                                ) : (
+                                                    // No screenshot yet — the language mark is the artwork.
+                                                    <span
+                                                        className="language-mark"
+                                                        aria-hidden="true"
+                                                    >
+                                                        {project.language}
+                                                    </span>
+                                                )}
+                                            </div>
+
+                                            <div className="min-w-0 flex-1">
+                                                <p className="bracket sm:hidden">
+                                                    {project.platform}
+                                                </p>
+                                                <p className="prose-body mt-3 sm:mt-0">
+                                                    {project.description}
+                                                </p>
+
+                                                {project.href && (
+                                                    <a
+                                                        href={project.href}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="link mt-5 inline-flex items-center gap-1.5"
+                                                    >
+                                                        View source
+                                                        <ArrowUpRight
+                                                            className="h-3.5 w-3.5"
+                                                            strokeWidth={2}
+                                                        />
+                                                    </a>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
                                 )}
-                            </Reveal>
-                        ))}
-                    </div>
+                            </div>
+                        </Reveal>
+                    );
+                })}
+            </div>
 
-                    <Reveal>
-                        <div className="mt-10 border-t border-[var(--rule)] pt-8">
-                            <a
-                                href="https://github.com/xiangzhi2003"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="btn"
-                            >
-                                <Github className="h-4 w-4" strokeWidth={1.75} />
-                                Source on GitHub
-                                <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={2} />
-                            </a>
-                        </div>
-                    </Reveal>
+            <div>
+                <div className="frame px-6 py-9 md:px-12">
+                    <a
+                        href="https://github.com/xiangzhi2003"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn"
+                    >
+                        <Github className="h-4 w-4" strokeWidth={1.75} />
+                        Source on GitHub
+                        <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={2} />
+                    </a>
                 </div>
             </div>
         </section>

@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { ScrollProgress } from "@/app/others/layout/ScrollProgress";
 
 const links = [
     { name: "About", href: "#about" },
@@ -56,13 +55,11 @@ export function Navbar() {
     return (
         <nav
             className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${scrolled
-                ? "border-b border-[var(--rule-soft)] bg-[color-mix(in_srgb,var(--bg)_88%,transparent)] backdrop-blur-md"
-                : "border-b border-transparent"
+                ? "bg-[color-mix(in_srgb,var(--bg)_82%,transparent)] backdrop-blur-xl"
+                : "bg-transparent"
                 }`}
         >
-            <ScrollProgress />
-
-            <div className="shell flex h-16 items-center justify-between">
+            <div className="frame flex h-16 items-center justify-between px-6 md:px-12">
                 <a
                     href="#home"
                     className="font-mono text-[length:var(--text-label)] tracking-[0.2em] text-[var(--fg)] transition-colors hover:text-[var(--accent)]"
@@ -98,16 +95,16 @@ export function Navbar() {
 
             {/* Mobile sheet */}
             <div
-                className={`overflow-hidden border-t border-[var(--rule-soft)] bg-[var(--bg)] transition-[max-height] duration-300 ease-out md:hidden ${open ? "max-h-96" : "max-h-0 border-t-transparent"
+                className={`overflow-hidden bg-[var(--bg)] transition-[max-height] duration-300 ease-out md:hidden ${open ? "max-h-96" : "max-h-0"
                     }`}
             >
-                <div className="shell flex flex-col py-2">
+                <div className="frame flex flex-col px-6 py-2 md:px-12">
                     {links.map((link) => (
                         <a
                             key={link.name}
                             href={link.href}
                             onClick={() => setOpen(false)}
-                            className={`label border-b border-[var(--rule-soft)] py-4 last:border-b-0 ${active === link.href.slice(1) ? "text-[var(--accent)]" : ""
+                            className={`label py-4 ${active === link.href.slice(1) ? "text-[var(--accent)]" : ""
                                 }`}
                         >
                             {link.name}

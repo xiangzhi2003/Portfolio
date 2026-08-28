@@ -2,11 +2,13 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Reveal } from "@/app/others/layout/Reveal";
-import { SectionRail } from "@/app/others/layout/SectionRail";
+import { SectionBar } from "@/app/others/layout/SectionBar";
 
 /*
-  A log, newest first. The year lives in the rail so the column of dates is
-  scannable on its own; the kind of entry is a word, not a coloured icon.
+  A log, newest first. The period and kind live in a left column so the dates
+  are scannable on their own, and the kind is a word rather than a coloured
+  icon. Badge wording matches the filter tabs exactly, so a badge and the
+  control that filters for it read as the same thing.
 */
 type Kind = "Work" | "Education" | "Award" | "Activity";
 
@@ -17,7 +19,7 @@ interface Entry {
     organization: string;
     location?: string;
     description: string;
-    /** Renders the brass "Current" pip. Set this on your role once you start one. */
+    /** Fills the badge brass. Set this on your role once you start one. */
     current?: boolean;
 }
 
@@ -29,7 +31,7 @@ const entries: Entry[] = [
         organization: "Asia Pacific University",
         location: "Kuala Lumpur",
         description:
-            "Software design, data structures, algorithms, and database systems. Completed with a 3.3 GPA; convocation pending.",
+            "Software design, data structures, algorithms, and database systems. Completed with a 3.66 GPA; convocation pending.",
     },
     {
         kind: "Activity",
@@ -97,10 +99,7 @@ export function Timeline() {
         const activeTab = container.querySelector<HTMLElement>('[aria-selected="true"]');
         if (!activeTab) return;
 
-        setIndicator({
-            left: activeTab.offsetLeft,
-            width: activeTab.offsetWidth,
-        });
+        setIndicator({ left: activeTab.offsetLeft, width: activeTab.offsetWidth });
     }, []);
 
     useEffect(() => {
@@ -128,88 +127,89 @@ export function Timeline() {
 
     return (
         <section id="log" className="section">
-            <div className="shell section-grid">
-                <SectionRail label="Log" meta="Newest first" />
-
-                <div>
-                    {/* Filters: mono labels on a hairline, with one underline that slides. */}
-                    <div
-                        ref={tabsRef}
-                        role="tablist"
-                        aria-label="Filter log by kind"
-                        className="relative flex flex-wrap items-center gap-x-7 gap-y-2 border-b border-[var(--rule)] pb-4"
-                    >
-                        {available.map((kind) => {
-                            const selected = filter === kind;
-                            return (
-                                <button
-                                    key={kind}
-                                    role="tab"
-                                    aria-selected={selected}
-                                    onClick={() => setFilter(kind)}
-                                    className={`label transition-colors ${selected
-                                        ? "text-[var(--accent)]"
-                                        : "hover:text-[var(--fg)]"
-                                        }`}
-                                >
-                                    {kind}
-                                    <span className="ml-1.5 opacity-60">{counts[kind]}</span>
-                                </button>
-                            );
-                        })}
-
-                        <span
-                            aria-hidden="true"
-                            className="pointer-events-none absolute -bottom-px h-0.5 bg-[var(--accent)]"
-                            style={{
-                                left: indicator.left,
-                                width: indicator.width,
-                                transition:
-                                    "left 340ms var(--ease), width 340ms var(--ease)",
-                            }}
-                        />
-                    </div>
-
-                    <div>
-                        {visible.map((entry, index) => (
-                            <Reveal
-                                key={`${entry.title}-${entry.period}`}
-                                delay={Math.min(index, 3) * 60}
+            <SectionBar number="04" label="Log">
+                <div
+                    ref={tabsRef}
+                    role="tablist"
+                    aria-label="Filter log by kind"
+                    className="relative flex flex-wrap items-center gap-x-5 gap-y-1.5"
+                >
+                    {available.map((kind) => {
+                        const selected = filter === kind;
+                        return (
+                            <button
+                                key={kind}
+                                role="tab"
+                                aria-selected={selected}
+                                onClick={() => setFilter(kind)}
+                                className={`label pb-1 transition-colors ${selected
+                                    ? "text-[var(--accent)]"
+                                    : "hover:text-[var(--fg)]"
+                                    }`}
                             >
-                                <article className="grid gap-2 border-b border-[var(--rule-soft)] py-7 md:grid-cols-[10rem_1fr] md:gap-8">
-                                    <div className="flex items-baseline gap-3 md:flex-col md:gap-1.5">
-                                        <p className="mono text-[var(--fg)]">{entry.period}</p>
-                                        <p className="label">{entry.kind}</p>
-                                    </div>
+                                {kind}
+                                <span className="ml-1.5 opacity-60">{counts[kind]}</span>
+                            </button>
+                        );
+                    })}
 
-                                    <div>
-                                        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                                            <h3 className="entry-title">{entry.title}</h3>
-                                            {entry.current && <span className="pip">Current</span>}
-                                        </div>
+                    <span
+                        aria-hidden="true"
+                        className="pointer-events-none absolute bottom-0 h-0.5 bg-[var(--accent)]"
+                        style={{
+                            left: indicator.left,
+                            width: indicator.width,
+                            transition: "left 340ms var(--ease), width 340ms var(--ease)",
+                        }}
+                    />
+                </div>
+            </SectionBar>
 
-                                        <p className="mt-1.5 text-[var(--fg-muted)]">
-                                            {entry.organization}
-                                            {entry.location && (
-                                                <span className="text-[var(--fg-faint)]">
-                                                    {" · "}
-                                                    {entry.location}
-                                                </span>
-                                            )}
-                                        </p>
+            <div className="frame">
+                {visible.map((entry, index) => (
+                    <Reveal
+                        key={`${entry.title}-${entry.period}`}
+                        delay={Math.min(index, 3) * 60}
+                    >
+                        <article
+                            className="log-row mt-3 grid gap-4 px-6 py-7 first:mt-0 md:grid-cols-[13rem_1fr] md:gap-0 md:px-8"
+                        >
+                            <div className="flex flex-wrap items-center gap-3 md:flex-col md:items-start md:gap-3 md:pr-8">
+                                <p className="log-period mono text-[var(--fg)]">
+                                    {entry.period}
+                                </p>
+                                <span className="badge" data-current={entry.current}>
+                                    {entry.kind}
+                                </span>
+                            </div>
 
-                                        <p className="prose-body mt-3">{entry.description}</p>
-                                    </div>
-                                </article>
-                            </Reveal>
-                        ))}
-                    </div>
+                            <div className="md:pl-8">
+                                <h3 className="entry-title">{entry.title}</h3>
 
-                    <div className="pt-8">
-                        <a href="/resume.pdf" download className="btn">
-                            Download resume (PDF)
-                        </a>
-                    </div>
+                                <p className="mono mt-1.5 uppercase tracking-wider text-[var(--fg-muted)]">
+                                    {entry.organization}
+                                    {entry.location && (
+                                        <span className="text-[var(--fg-faint)]">
+                                            {" · "}
+                                            {entry.location}
+                                        </span>
+                                    )}
+                                </p>
+
+                                <p className="log-detail prose-body mt-3.5">
+                                    {entry.description}
+                                </p>
+                            </div>
+                        </article>
+                    </Reveal>
+                ))}
+            </div>
+
+            <div>
+                <div className="frame px-6 py-9 md:px-12">
+                    <a href="/resume.pdf" download className="btn">
+                        Download resume (PDF)
+                    </a>
                 </div>
             </div>
         </section>

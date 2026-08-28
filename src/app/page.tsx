@@ -10,7 +10,10 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main>
+      {/* Clears the fixed navbar: 4rem of content plus its 1px bottom border.
+          The hero now opens with a full-bleed status strip, so this offset has
+          to live here rather than as padding on the hero itself. */}
+      <main className="pt-[calc(4rem+1px)]">
         <Hero />
         <About />
         <Projects />

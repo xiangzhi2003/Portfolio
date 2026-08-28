@@ -1,86 +1,82 @@
-import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/app/others/layout/Reveal";
-import { SectionRail } from "@/app/others/layout/SectionRail";
+import { SectionBar } from "@/app/others/layout/SectionBar";
 
 const channels = [
     {
-        key: "Email",
+        key: "email",
         value: "xiangzhichiang2003@gmail.com",
         href: "mailto:xiangzhichiang2003@gmail.com",
     },
-    { key: "Phone", value: "+60 18-275 8288", href: "tel:+60182758288" },
-    { key: "GitHub", value: "xiangzhi2003", href: "https://github.com/xiangzhi2003", external: true },
+    { key: "phone", value: "+60 18-275 8288", href: "tel:+60182758288" },
     {
-        key: "LinkedIn",
-        value: "xiang-zhi-chiang",
+        key: "github",
+        value: "github.com/xiangzhi2003",
+        href: "https://github.com/xiangzhi2003",
+        external: true,
+    },
+    {
+        key: "linkedin",
+        value: "linkedin.com/in/xiang-zhi-chiang",
         href: "https://www.linkedin.com/in/xiang-zhi-chiang-6723a9299/",
         external: true,
     },
-    { key: "Location", value: "Puchong, Selangor, Malaysia" },
 ];
 
 export function Contact() {
     return (
         <>
-            <section id="contact" className="section" data-band="alt">
-                <div className="shell section-grid">
-                    <SectionRail label="Contact" alignToText />
+            <section id="contact" className="section contours" data-band="alt">
+                <SectionBar number="05" label="Contact" />
 
+                <div className="split">
                     <div>
                         <Reveal>
-                            <p className="prose-body">
-                                If you&apos;re hiring, or you want to talk through something I&apos;ve
-                                built, email is the fastest way to reach me — I reply within a day.
+                            <h2 className="statement">
+                                Open to graduate software engineering roles.
+                            </h2>
+                            <p className="prose-body mt-7">
+                                If you&apos;re hiring, or you want to talk through something
+                                I&apos;ve built, email is the fastest way to reach me — I reply
+                                within a day.
                             </p>
                         </Reveal>
+                    </div>
 
+                    <div>
                         <Reveal delay={80}>
-                            <dl className="mt-10 border-t border-[var(--rule)]">
+                            <div className="flex flex-col gap-3">
                                 {channels.map((channel) => (
-                                    <div
+                                    <a
                                         key={channel.key}
-                                        className="flex flex-col gap-1 border-b border-[var(--rule-soft)] py-4 sm:flex-row sm:items-baseline sm:gap-6"
+                                        href={channel.href}
+                                        className="card"
+                                        {...(channel.external
+                                            ? { target: "_blank", rel: "noopener noreferrer" }
+                                            : {})}
                                     >
-                                        <dt className="label sm:w-32 sm:shrink-0">{channel.key}</dt>
-                                        <dd>
-                                            {channel.href ? (
-                                                <a
-                                                    href={channel.href}
-                                                    className="link inline-flex items-center gap-1.5"
-                                                    {...(channel.external
-                                                        ? { target: "_blank", rel: "noopener noreferrer" }
-                                                        : {})}
-                                                >
-                                                    {channel.value}
-                                                    {channel.external && (
-                                                        <ArrowUpRight
-                                                            className="h-3.5 w-3.5"
-                                                            strokeWidth={2}
-                                                        />
-                                                    )}
-                                                </a>
-                                            ) : (
-                                                <span className="text-[var(--fg-muted)]">
-                                                    {channel.value}
-                                                </span>
-                                            )}
-                                        </dd>
-                                    </div>
+                                        <span className="min-w-0">
+                                            <span className="bracket block">{channel.key}</span>
+                                            <span className="mt-2 block truncate text-[var(--fg)]">
+                                                {channel.value}
+                                            </span>
+                                        </span>
+                                        <span className="card-arrow" aria-hidden="true">
+                                            →
+                                        </span>
+                                    </a>
                                 ))}
-                            </dl>
+                            </div>
                         </Reveal>
                     </div>
                 </div>
             </section>
 
-            <footer className="border-t border-[var(--rule-soft)] py-10">
-                <div className="shell flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                    <p className="mono text-[var(--fg-faint)]">
+            <footer>
+                <div className="frame flex flex-col gap-3 px-6 py-8 sm:flex-row sm:items-center sm:justify-between md:px-12">
+                    <p className="label">
                         © {new Date().getFullYear()} Chiang Xiang Zhi
                     </p>
-                    <p className="mono text-[var(--fg-faint)]">
-                        Next.js · Tailwind · deployed on Vercel
-                    </p>
+                    <p className="label">Puchong, Selangor · MY</p>
                 </div>
             </footer>
         </>

@@ -16,29 +16,37 @@ presented like an engineering spec sheet rather than a landing page.
 
 Three rules hold it together:
 
-- **One accent.** Brass (`#8a6114`), used only for live state, links, and the
-  language marks. Everything else is warm paper and ink. Every text colour is
-  checked against the ground for WCAG AA.
-- **A label rail.** Every section is a sticky mono label on the left and content
-  on the right, so the page has one structural idea instead of six. The rail also
-  carries a brass track showing how far through that section you've scrolled.
+- **One accent.** Acid green (`#bcff3a`) on a near-black ground, used only for
+  live state, section indices, links, and hover. Every text colour is checked
+  against **both** section bands for WCAG AA — the lighter band is the harder
+  case, and it's what catches values that only pass on the darker one.
+- **Separation by space, not lines.** There is effectively one border on the
+  whole page (the pull-quote's accent bar). Sections are divided by an
+  alternating band and a large block of vertical air; rows, tags, badges, and
+  buttons are raised filled surfaces rather than outlined boxes. Content sits in
+  a centred frame while backgrounds run edge to edge, and prose narrows further
+  to a readable measure — three width tiers, so the page has rhythm.
 - **The language mark.** Each project is stamped with the language it was built
-  in, set large in the display face. Scrolling the work section reads
-  `C# → Flutter → Java → Python → C++ → R` — the honest through-line, and the
-  reason there are no per-project gradients or decorative icons.
+  in, set large in the display face. It stands in as the artwork in a project's
+  preview slot until a real screenshot exists — which is why there are no
+  per-project gradients or decorative icons.
 
 Type is Archivo (display), Instrument Sans (body), and JetBrains Mono (every
-label, year, and count), on a ~1.25 modular scale defined once as tokens in
-`globals.css` — no per-component font sizes.
+label, year, and count), sized once as tokens in `globals.css` — no
+per-component font sizes.
 
-The ground is a warm paper white with a generated fractal-noise grain over it.
-The texture is what keeps a light theme from reading as flat white screen; it
-costs no network request.
+Backgrounds: a generated fractal-noise film grain over the whole page, plus
+three photographic textures in `public/textures/` — behind the hero, revealed on
+hover across the About section, and behind Contact. All are desaturated and
+screen-blended at very low opacity so they read as atmosphere rather than
+pictures, and all are self-hosted rather than hotlinked.
 
 Motion is tied to content or interaction, never ambient: a load sequence and mask
-wipe in the hero, scroll progress in the rails and above the nav, a 12px settle
-on first view, a sliding filter underline, and hover states on entries and links.
-Nothing loops, nothing parallaxes, and `prefers-reduced-motion` is respected.
+wipe in the hero, a 12px settle on first view, a sliding filter underline, and
+hover states throughout. Nothing tracks the scroll position, nothing parallaxes,
+and `prefers-reduced-motion` is respected — with one
+deliberate exception, the stack ticker, which keeps scrolling because it is a
+constant-speed drift rather than the sudden motion that setting guards against.
 
 ## Structure
 
@@ -51,13 +59,12 @@ src/
 │   ├── robots.ts, sitemap.ts
 │   └── others/layout/
 │       ├── Navbar.tsx          nav + scroll spy
-│       ├── SectionRail.tsx     sticky label + section progress
-│       ├── ScrollProgress.tsx  page progress bar
-│       └── Reveal.tsx          scroll reveals (settle + mask)
-├── home/Hero.tsx               name + status block
-├── about/About.tsx, content.ts
-├── projects/Projects.tsx       work index
-├── skills/TechStack.tsx        stack spec sheet
+│       ├── SectionBar.tsx      numbered section header
+│       └── Reveal.tsx          scroll reveals
+├── home/Hero.tsx               status strip, name, fact grid
+├── about/About.tsx, content.ts pull-quote | bio split
+├── projects/Projects.tsx       expandable work rows
+├── skills/TechStack.tsx        ticker + category grid
 ├── timeline/Timeline.tsx       log
 └── contact/Contact.tsx         contact + footer
 ```
@@ -78,7 +85,9 @@ All content is plain data at the top of its section file:
 | Colours, type sizes, spacing, speed | the **ADJUST ME** block at the top of `src/app/globals.css` |
 | Profile photo, resume | `public/profile.jpg`, `public/resume.pdf` |
 
-Adding an `href` to a project makes that whole tile a link to the repo.
+Adding an `href` to a project puts a "View source" link inside its expanded
+panel. (It can't wrap the row itself — the row is the expand/collapse button,
+and an anchor inside a button is invalid HTML.)
 
 ### Common adjustments
 
@@ -89,10 +98,12 @@ Every visual value lives in one commented block at the top of
 |---|---|
 | Size of your name | `--text-display` |
 | Page darkness | `--bg`, `--bg-alt`, `--bg-sunken` |
+| How raised the cards look | `--surface`, `--surface-alt` |
+| Corner rounding | `--radius` |
+| Content width (backgrounds stay full-bleed) | `--frame` |
 | How big body text is | `--text-prose` |
 | How big project titles are | `--text-title` |
-| Speed of the scrolling stack | `--marquee-speed` (higher = slower) |
-| Width of the left label column | `--rail` |
+| Speed of the stack ticker | `--marquee-speed` (px/second; higher = faster) |
 
 If you darken `--bg`, check the contrast ratios noted beside the text colours
 and darken those to match — keep every one at 4.5:1 or better.
@@ -113,8 +124,8 @@ language mark, so the layout is the same either way:
 }
 ```
 
-The language mark moves to a small brass label beside the title once an image
-takes the slot.
+The screenshot simply replaces the language mark in that slot. Nothing is lost:
+each project's language is also listed in its stack tags on the collapsed row.
 
 ## Local development
 
