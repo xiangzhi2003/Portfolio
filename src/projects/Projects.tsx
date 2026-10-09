@@ -48,29 +48,45 @@ const projects: Project[] = [
         language: "Flutter",
         platform: "Final year project",
         description:
-            "A campus marketplace and rental app gated to university email addresses, so students trade textbooks and equipment inside a community that can be verified. Three parts carry the work: an AI concierge that blends semantic search over a vector database with keyword search, an escrow vault that holds funds until handover, and a time-based QR handshake scanned in person to confirm both pickup and return.",
-        stack: ["Flutter", "Dart", "Python", "FastAPI", "Supabase", "Pinecone", "Gemini", "Stripe"],
+            "A campus marketplace and rental app gated to university email addresses, so students trade textbooks and equipment inside a community that can be verified. Three parts carry the work: an AI concierge that blends RAG-based semantic search (LangChain, Pinecone, Gemini) with keyword search, an escrow vault on Stripe Connect that holds funds until handover, and a time-based QR (TOTP) handshake scanned in person to confirm both pickup and return.",
+        stack: ["Flutter", "Dart", "Python", "FastAPI", "Supabase", "Pinecone", "LangChain", "Gemini", "Stripe"],
         href: "https://github.com/xiangzhi2003/UniLink---FYP",
         demo: "https://unilink-fyp-production-a474.up.railway.app/",
     },
     {
         title: "Property Management Portal",
         language: "C#",
-        platform: "Web",
+        platform: "Team lead",
         description:
-            "Properties, tenants, maintenance requests and payments across four separate role panels — admin, property manager, tenant, and maintenance staff — each seeing only what its role should. Sign-in runs through ASP.NET Identity or Google OAuth, and photo uploads go to S3 through a presigned URL issued by a Lambda behind API Gateway.",
+            "A cloud computing team project I led. Properties, tenants, maintenance requests and payments across four separate role panels — admin, property manager, tenant, and maintenance staff — each seeing only what its role should. Sign-in runs through ASP.NET Identity or Google OAuth, and photo uploads go to S3 through a presigned URL issued by a Lambda behind API Gateway.",
         stack: ["ASP.NET Core 8", "C#", "EF Core", "PostgreSQL", "AWS Lambda", "S3", "Stripe"],
         href: "https://github.com/xiangzhi2003/PropertyManagementPortal",
     },
     {
         title: "GapMap",
         language: "TypeScript",
-        platform: "Web",
+        platform: "KitaHack 2026",
         description:
-            "Answers \"where should I open this business?\" from a plain-English question. The query is classified into a structured intent, nearby competitors are pulled live from Google Places, and the result comes back as red, orange and green zones with real coordinates and radii drawn onto the map. Built across eight Google Maps Platform APIs.",
+            "Built for KitaHack 2026 around the UN Sustainable Development Goals using Google Cloud technologies. Answers \"where should I open this business?\" from a plain-English question. The query is classified into a structured intent, nearby competitors are pulled live from Google Places, and the result comes back as red, orange and green zones with real coordinates and radii drawn onto the map. Built across eight Google Maps Platform APIs.",
         stack: ["Next.js", "React 19", "TypeScript", "Tailwind", "Gemini", "Firebase"],
         href: "https://github.com/xiangzhi2003/GapMap",
         demo: "https://gapmap.vercel.app",
+    },
+    {
+        title: "Next-Gen Parking",
+        language: "JavaScript",
+        platform: "HackMY IoT 2026",
+        description:
+            "Entry for the Industrial & Asset IoT track (Track 2) of the HackMY IoT hackathon at Monash University Malaysia, September 2026. Built with a JavaScript, HTML and CSS front end and a Python FastAPI backend.",
+        stack: ["JavaScript", "HTML", "CSS", "Python", "FastAPI"],
+    },
+    {
+        title: "Secondhand Marketplace App",
+        language: "Flutter",
+        platform: "Mobile",
+        description:
+            "A secondhand marketplace app connecting admins, buyers and sellers. Designed, tested and documented from user research as a university project.",
+        stack: ["Flutter", "Dart", "Firebase"],
     },
     {
         title: "Distributed HRM System",

@@ -11,16 +11,16 @@ const facts = [
     {
         key: "degree",
         value: "BSc (Hons) Software Engineering",
-        meta: "Asia Pacific University — GPA 3.66",
+        meta: "Asia Pacific University — CGPA 3.42, Second Upper",
     },
     {
         key: "recent role",
-        value: "Software Engineering Intern",
-        meta: "IJM Corporation — Flutter & .NET",
+        value: "Software IT Intern",
+        meta: "IJM Corporation — Flutter",
     },
     {
         key: "languages",
-        value: "English, Mandarin",
+        value: "English, Chinese",
         meta: "Malay, Cantonese",
     },
 ];
@@ -82,9 +82,11 @@ export function Hero() {
                         className="rise prose-body flex-1"
                         style={{ animationDelay: "260ms" }}
                     >
-                        I build the unglamorous software that organisations actually run on —
-                        point-of-sale, inventory, enrolment, order tracking — and I pick the
-                        stack to fit the problem rather than the other way around.
+                        Full Stack Software engineer and recent graduate with a strong focus on applied AI.
+                        I design and deliver production-ready applications end to end,
+                        integrating large language models and retrieval-augmented search to
+                        solve real user problems. Seeking a full-time role where I can build
+                        scalable, AI-driven products.
                     </p>
                 </div>
 
@@ -99,7 +101,7 @@ export function Hero() {
                     <a href="mailto:xiangzhichiang2003@gmail.com" className="btn">
                         Email me
                     </a>
-                    <a href="/resume.pdf" className="btn" download>
+                    <a href="/resume.pdf" className="btn" download="Final Resume Chiang Xiang Zhi.pdf">
                         Resume
                     </a>
                 </div>

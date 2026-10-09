@@ -25,55 +25,63 @@ interface Entry {
 
 const entries: Entry[] = [
     {
+        kind: "Award",
+        period: "Sep 2026",
+        title: "HackMY IoT 2026 — Track 2",
+        organization: "Monash University Malaysia",
+        description:
+            "Entered the Industrial & Asset IoT track with \"Next-Gen Parking\".",
+    },
+    {
         kind: "Education",
         period: "Completed 2026",
         title: "BSc (Hons) Software Engineering",
         organization: "Asia Pacific University",
         location: "Kuala Lumpur",
         description:
-            "Software design, data structures, algorithms, and database systems. Completed with a 3.66 GPA; convocation pending.",
+            "Software design, data structures, algorithms, and database systems. Graduated with a CGPA of 3.42 (Second Upper).",
     },
     {
         kind: "Activity",
-        period: "Until 2026",
+        period: "Dec 2023 – Feb 2025",
         title: "Committee Member",
         organization: "OperationClub, APU",
         description:
-            "Ran events and workshops for the club — planning, logistics, and getting a team of volunteers to the same page on the day.",
+            "Committee member in the Operations Department, helping run club events and activities. Also a member of the Chinese Club.",
     },
     {
         kind: "Work",
         period: "Jul – Nov 2025",
-        title: "Software Engineering Intern",
+        title: "Software IT Intern",
         organization: "IJM Corporation",
         location: "Malaysia",
         description:
-            "Built internal applications with Flutter and .NET, working in the engineering team's Agile cycle from ticket to release.",
+            "Digitised manual company workflows by developing and deploying custom internal web and mobile applications in Flutter.",
     },
     {
         kind: "Work",
-        period: "2022 – 2025",
+        period: "2022 – 2026",
         title: "Event Crew & Promoter",
-        organization: "Sime Darby, Guardian, Astro, Sunway Pyramid",
+        organization: "Sime Darby, Guardian, IME, Astro, Sunway Pyramid",
         location: "Malaysia",
         description:
             "Weekend brand activations — setup, registration, product demos, and handling customer questions directly on the floor.",
     },
     {
         kind: "Award",
-        period: "2024",
-        title: "Top 10 Finalist",
-        organization: "Joget NextGenHack",
+        period: "Dec 2024",
+        title: "Top 10 Shortlisted",
+        organization: "Joget NextGenHack, APU",
         description:
-            "Placed in the top ten of a national low-code hackathon, building and pitching a working prototype under a weekend deadline.",
+            "Shortlisted in the top ten of a low-code / no-code enterprise solutions challenge.",
     },
     {
         kind: "Work",
         period: "Jun – Sep 2023",
-        title: "Digital Marketing Intern",
-        organization: "Cereals Project",
+        title: "Digital Marketer Intern",
+        organization: "Cereals Project, Shopee Malaysia Store",
         description:
-            "Ran social campaigns end to end: content, scheduling, and reading the metrics afterwards to decide what to change.",
+            "Optimised Shopee product listings and created digital marketing content, while supporting and tracking the performance of online sales campaigns.",
     },
     {
         kind: "Award",
@@ -81,6 +89,13 @@ const entries: Entry[] = [
         title: "Honorable Mention",
         organization: "International Kangaroo Math Competition",
         description: "Recognised in the international round of the competition.",
+    },
+    {
+        kind: "Award",
+        period: "Certificate",
+        title: "Safe Internet & Cybercrime Awareness",
+        organization: "Digi Yellow Heart",
+        description: "Completed the Digi Yellow Heart online-safety and cybercrime awareness programme.",
     },
 ];
 
@@ -254,7 +269,7 @@ export function Timeline() {
 
             <div>
                 <div className="frame px-6 py-9 md:px-12">
-                    <a href="/resume.pdf" download className="btn">
+                    <a href="/resume.pdf" download="Final Resume Chiang Xiang Zhi.pdf" className="btn">
                         Download resume (PDF)
                     </a>
                 </div>
