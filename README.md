@@ -56,21 +56,30 @@ constant-speed drift rather than the sudden motion that setting guards against.
 ## Structure
 
 ```
-index.html        all content and markup
-styles.css        design tokens (:root) + component classes
-script.js         navbar, scroll reveal, accordions, log filters, ticker
-profile.jpg       profile photo
-Final Resume Chiang Xiang Zhi.pdf
-textures/         hero, about and contact background textures
-log/              images shown in opened Log entries
-projects/         Work screenshots (see below)
-robots.txt, sitemap.xml, favicon.ico
-vercel.json       security headers
+.
+├── src/                          everything the website serves
+│   ├── index.html                all content and markup
+│   ├── css/styles.css            design tokens (:root) + component classes
+│   ├── js/script.js              navbar, reveals, accordions, log filters, ticker
+│   ├── assets/
+│   │   ├── fonts/                self-hosted Archivo, Instrument Sans, JetBrains Mono
+│   │   ├── images/
+│   │   │   ├── profile.jpg
+│   │   │   ├── textures/         hero, about and contact background textures
+│   │   │   ├── log/              images shown in opened Log entries
+│   │   │   └── projects/         Work screenshots (see below)
+│   │   └── docs/                 resume PDF
+│   ├── favicon.ico
+│   ├── robots.txt
+│   └── sitemap.xml
+├── vercel.json                   output directory, security + cache headers
+├── README.md
+└── LICENSE
 ```
 
 ## Editing content
 
-Everything is plain markup in `index.html`. Search for the section's `id`:
+Everything is plain markup in `src/index.html`. Search for the section's `id`:
 
 | What | Where |
 |------|-------|
@@ -80,7 +89,8 @@ Everything is plain markup in `index.html`. Search for the section's `id`:
 | Stack | `<section id="stack">` (the ticker repeats this list automatically) |
 | Experience, education, awards | `.log-item` rows inside `<section id="log">` |
 | Contact details | `<section id="contact">` |
-| Colours, type sizes, spacing, speed | the **ADJUST ME** block at the top of `styles.css` |
+| Colours, type sizes, spacing, speed | the **ADJUST ME** block at the top of `src/css/styles.css` |
+| Resume | replace the PDF in `src/assets/docs/` (keep the filename, or update the two links in `index.html`) |
 
 If you add or remove a Log entry, also update the counts on the filter tabs
 (the number beside All, Work, Education, Award, Activity). The project count in
@@ -96,18 +106,19 @@ dead link is worse than none.
 Every project row has a preview slot. Until a screenshot exists it holds the
 language mark, so the layout is the same either way:
 
-1. Put the image in `projects/` — 16:10, around 1600×1000, PNG or JPG.
+1. Put the image in `src/assets/images/projects/` — 16:10, around 1600×1000,
+   PNG or JPG.
 2. In that project's `<div class="preview">`, replace the language-mark `<span>`
    with:
 
 ```html
-<img src="projects/unilink.png" alt="UniLink screenshot"
+<img src="assets/images/projects/unilink.png" alt="UniLink screenshot"
      class="absolute inset-0 h-full w-full object-cover">
 ```
 
 ### Common adjustments
 
-| To change | Edit in `styles.css` |
+| To change | Edit in `src/css/styles.css` |
 |---|---|
 | Size of your name | `--text-display` |
 | Page darkness | `--bg`, `--bg-alt`, `--bg-sunken` |
@@ -121,20 +132,21 @@ keep every one at 4.5:1 or better.
 
 ## Local development
 
-No install and no build. Serve the folder with any static server:
+No install and no build. Serve the `src` folder with any static server:
 
 ```bash
 git clone https://github.com/xiangzhi2003/Portfolio.git
 cd Portfolio
-npx serve .
+npx serve src
 ```
 
-Then open http://localhost:3000. Opening `index.html` directly also works.
+Then open http://localhost:3000. Opening `src/index.html` directly also works.
 
 ## Deployment
 
-Pushes to `master` deploy automatically via Vercel. In the Vercel project set
-**Framework Preset: Other**, no build command, and output directory `.`.
+Pushes to `master` deploy automatically via Vercel. `vercel.json` sets the
+output directory to `src` with no framework and no build command, so no
+dashboard settings are needed.
 
 ## History
 

@@ -16,16 +16,42 @@
   <meta property="og:title" content="Chiang Xiang Zhi — Software Engineer">
   <meta property="og:description" content="Full-stack software engineer and recent Asia Pacific University graduate with a strong focus on applied AI. Seeking a full-time role building scalable, AI-driven products.">
   <meta property="og:url" content="https://chiangxiangzhi.vercel.app/">
+  <meta property="og:image" content="https://chiangxiangzhi.vercel.app/assets/images/profile.jpg">
   <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://chiangxiangzhi.vercel.app/assets/images/profile.jpg">
   <meta name="twitter:title" content="Chiang Xiang Zhi — Software Engineer">
   <meta name="twitter:description" content="Full-stack software engineer and recent Asia Pacific University graduate with a strong focus on applied AI. Seeking a full-time role building scalable, AI-driven products.">
   <link rel="icon" href="favicon.ico">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Instrument+Sans:wght@400..700&family=JetBrains+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Chiang Xiang Zhi",
+    "jobTitle": "Software Engineer",
+    "url": "https://chiangxiangzhi.vercel.app/",
+    "email": "mailto:xiangzhichiang2003@gmail.com",
+    "image": "https://chiangxiangzhi.vercel.app/assets/images/profile.jpg",
+    "alumniOf": "Asia Pacific University of Innovation & Technology",
+    "sameAs": [
+      "https://github.com/xiangzhi2003",
+      "https://www.linkedin.com/in/xiang-zhi-chiang-6723a9299/"
+    ]
+  }
+  </script>
+  <noscript>
+    <style>
+      .reveal { opacity: 1; transform: none; }
+      .work-panel[hidden] { display: block !important; }
+      .log-item[hidden] { display: block; }
+    </style>
+  </noscript>
 </head>
 <body class="antialiased">
+    <a href="#about" class="skip-link">Skip to content</a>
     <nav class="nav fixed inset-x-0 top-0 z-50" id="nav" data-scrolled="false">
       <div class="flex h-16 items-center justify-between px-6 md:px-12">
         <a href="#home" class="-my-3 flex items-center py-3 font-mono text-[length:var(--text-label)] tracking-[0.2em] text-[var(--fg)] transition-colors hover:text-[var(--accent)]">CXZ</a>
@@ -53,13 +79,13 @@
         </div>
         <div class="mt-10 flex flex-col gap-10 md:flex-row md:items-start md:gap-12">
           <div class="rise relative h-40 w-40 shrink-0 overflow-hidden rounded-2xl sm:h-48 sm:w-48" style="animation-delay:200ms">
-            <img src="profile.jpg" alt="Chiang Xiang Zhi" width="192" height="192" class="absolute inset-0 h-full w-full object-cover" fetchpriority="high">
+            <img src="assets/images/profile.jpg" alt="Chiang Xiang Zhi" width="192" height="192" class="absolute inset-0 h-full w-full object-cover" fetchpriority="high">
           </div>
           <p class="rise prose-body flex-1" style="animation-delay:260ms">Full Stack Software engineer and recent graduate with a strong focus on applied AI. I design and deliver production-ready applications end to end, integrating large language models and retrieval-augmented search to solve real user problems. Seeking a full-time role where I can build scalable, AI-driven products.</p>
         </div>
         <div class="rise mt-10 flex flex-wrap items-center gap-3" style="animation-delay:320ms">
           <a href="#work" class="btn btn-primary">See the work <svg class="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></a>
-          <a href="Final%20Resume%20Chiang%20Xiang%20Zhi.pdf" class="btn" download>Resume</a>
+          <a href="assets/docs/Final%20Resume%20Chiang%20Xiang%20Zhi.pdf" class="btn" download>Resume</a>
         </div>
       </div>
       <div class="frame grid grid-cols-1 gap-8 px-6 pt-4 md:grid-cols-3 md:gap-10 md:px-12"><div><p class="bracket">degree</p><p class="mt-2.5 text-[var(--fg)]">BSc (Hons) Software Engineering</p><p class="mono mt-1 text-[var(--fg-faint)]">Asia Pacific University — CGPA 3.42, Second Upper</p></div><div><p class="bracket">recent role</p><p class="mt-2.5 text-[var(--fg)]">Software IT Intern</p><p class="mono mt-1 text-[var(--fg-faint)]">IJM Corporation — Flutter</p></div><div><p class="bracket">languages</p><p class="mt-2.5 text-[var(--fg)]">English, Chinese</p><p class="mono mt-1 text-[var(--fg-faint)]">Malay, Cantonese</p></div></div>
@@ -272,7 +298,7 @@
             </button>
             <div id="log-panel-0" class="work-panel">
               <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-7">
-                <a href="log/hackmy-iot-2026.jpg" target="_blank" rel="noopener noreferrer" class="log-image shrink-0" aria-label="View full image: Participants and organisers at the Hack MY IoT hackathon, September 19–20, 2026, at Monash University Malaysia"><img src="log/hackmy-iot-2026.jpg" alt="Participants and organisers at the Hack MY IoT hackathon, September 19–20, 2026, at Monash University Malaysia" width="1600" height="1067" loading="lazy" class="h-auto w-full"></a><p class="log-detail prose-body min-w-0 flex-1">Entered the Industrial &amp; Asset IoT track with &quot;Next-Gen Parking&quot;.</p>
+                <a href="assets/images/log/hackmy-iot-2026.jpg" target="_blank" rel="noopener noreferrer" class="log-image shrink-0" aria-label="View full image: Participants and organisers at the Hack MY IoT hackathon, September 19–20, 2026, at Monash University Malaysia"><img src="assets/images/log/hackmy-iot-2026.jpg" alt="Participants and organisers at the Hack MY IoT hackathon, September 19–20, 2026, at Monash University Malaysia" width="1600" height="1067" loading="lazy" class="h-auto w-full"></a><p class="log-detail prose-body min-w-0 flex-1">Entered the Industrial &amp; Asset IoT track with &quot;Next-Gen Parking&quot;.</p>
               </div>
             </div>
           </div></div></div><div class="log-item" data-kind="Activity"><div class="reveal" style="--reveal-delay:60ms"><div class="work-row" data-open="false">
@@ -286,7 +312,7 @@
             </button>
             <div id="log-panel-1" class="work-panel" hidden>
               <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-7">
-                <a href="log/kitahack-2026-certificate.jpg" target="_blank" rel="noopener noreferrer" class="log-image shrink-0" aria-label="View full image: KitaHack 2026 certificate of appreciation awarded to Chiang Xiang Zhi as a participant"><img src="log/kitahack-2026-certificate.jpg" alt="KitaHack 2026 certificate of appreciation awarded to Chiang Xiang Zhi as a participant" width="1600" height="1132" loading="lazy" class="h-auto w-full"></a><p class="log-detail prose-body min-w-0 flex-1">Took part in KitaHack 2026 with GapMap, a project targeting the UN Sustainable Development Goals using Google Cloud technologies. Received a certificate of appreciation as a participant.</p>
+                <a href="assets/images/log/kitahack-2026-certificate.jpg" target="_blank" rel="noopener noreferrer" class="log-image shrink-0" aria-label="View full image: KitaHack 2026 certificate of appreciation awarded to Chiang Xiang Zhi as a participant"><img src="assets/images/log/kitahack-2026-certificate.jpg" alt="KitaHack 2026 certificate of appreciation awarded to Chiang Xiang Zhi as a participant" width="1600" height="1132" loading="lazy" class="h-auto w-full"></a><p class="log-detail prose-body min-w-0 flex-1">Took part in KitaHack 2026 with GapMap, a project targeting the UN Sustainable Development Goals using Google Cloud technologies. Received a certificate of appreciation as a participant.</p>
               </div>
             </div>
           </div></div></div><div class="log-item" data-kind="Education"><div class="reveal" style="--reveal-delay:120ms"><div class="work-row" data-open="false">
@@ -335,7 +361,7 @@
             <button type="button" class="work-toggle" aria-expanded="false" aria-controls="log-panel-5">
               <div class="log-grid">
                 <div class="log-meta"><span class="log-period mono text-[var(--fg)]">2022 – 2026</span><span class="badge">Work</span></div>
-                <h3 class="entry-title log-title">Event Crew &amp; Promoter</h3>
+                <h3 class="entry-title log-title">Event Crew <span class="amp">&amp;</span> Promoter</h3>
                 <p class="label log-org">Sime Darby, Guardian, IME, Astro, Sunway Pyramid<span class="text-[var(--fg-faint)]"> · Malaysia</span></p>
                 <span class="work-sign log-sign" aria-hidden="true">+</span>
               </div>
@@ -391,7 +417,7 @@
             <button type="button" class="work-toggle" aria-expanded="false" aria-controls="log-panel-9">
               <div class="log-grid">
                 <div class="log-meta"><span class="log-period mono text-[var(--fg)]">Certificate</span><span class="badge">Award</span></div>
-                <h3 class="entry-title log-title">Safe Internet &amp; Cybercrime Awareness</h3>
+                <h3 class="entry-title log-title">Safe Internet <span class="amp">&amp;</span> Cybercrime Awareness</h3>
                 <p class="label log-org">Digi Yellow Heart</p>
                 <span class="work-sign log-sign" aria-hidden="true">+</span>
               </div>
@@ -404,7 +430,7 @@
           </div></div></div>
       </div>
       <div>
-        <div class="frame px-6 py-9 md:px-12"><a href="Final%20Resume%20Chiang%20Xiang%20Zhi.pdf" download class="btn">Download resume (PDF)</a></div>
+        <div class="frame px-6 py-9 md:px-12"><a href="assets/docs/Final%20Resume%20Chiang%20Xiang%20Zhi.pdf" download class="btn">Download resume (PDF)</a></div>
       </div>
     </section>
     <section id="contact" class="section contours" data-band="alt">
@@ -422,6 +448,6 @@
     </footer>
     </main>
     <div class="grain" aria-hidden="true"></div>
-    <script src="script.js" defer></script>
+    <script src="js/script.js" defer></script>
 </body>
 </html>

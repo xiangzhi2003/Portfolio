@@ -1,3 +1,4 @@
+
 # misc
 .DS_Store
 *.pem
@@ -8,6 +9,3 @@ nul
 
 # vercel
 .vercel
-
-# node (only if tooling is ever added)
-node_modules
