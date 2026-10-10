@@ -986,7 +986,7 @@ body {
 }
 .log-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr);
   align-items: start;
   gap: 0.75rem 1rem;
 }
@@ -997,16 +997,12 @@ body {
   align-items: center;
   gap: 0.75rem;
 }
-.log-sign {
-  grid-column: 2;
-  grid-row: 1;
-}
 .log-title, .log-org {
   grid-column: 1 / -1;
 }
 @media (min-width: 1024px) {
   .log-grid {
-    grid-template-columns: 11rem minmax(0, 1fr) 13rem 2rem;
+    grid-template-columns: 11rem minmax(0, 1fr) 13rem;
     align-items: center;
     gap: 2rem;
   }
@@ -1026,16 +1022,11 @@ body {
     grid-row: 1;
     justify-self: start;
   }
-  .log-sign {
-    grid-column: 4;
-    grid-row: 1;
-    justify-self: end;
-  }
 }
 .work-toggle:hover .entry-title, .work-toggle:hover .log-period, .work-row[data-open="true"] .log-period {
   color: var(--accent);
 }
-.work-toggle:hover .badge:not([data-current="true"]) {
+.work-row:hover .badge:not([data-current="true"]) {
   border-color: var(--accent);
   @supports (color: color-mix(in lab, red, red)) {
     border-color: color-mix(in srgb, var(--accent) 45%, transparent);
@@ -1608,3 +1599,15 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
   font-weight: inherit;
 }
+
+/* Log entries are always open: a static header above the always-visible detail. */
+.log-head {
+  padding: 1.9rem 1.5rem 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .log-head {
+    padding: 2.1rem 2.25rem 1.25rem;
+  }
+}
+
