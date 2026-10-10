@@ -1,13 +1,12 @@
 # Chiang Xiang Zhi — Portfolio
 
-Personal portfolio site. Built with Next.js 16 and Tailwind CSS 4, deployed on Vercel.
+Personal portfolio site. Plain HTML, CSS and JavaScript — no framework, no build step. Deployed on Vercel.
 
 Live: https://chiangxiangzhi.vercel.app
 
-![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
-![React](https://img.shields.io/badge/React-19-61dafb?logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?logo=typescript)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38bdf8?logo=tailwindcss)
+![HTML5](https://img.shields.io/badge/HTML5-e34f26?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572b6?logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-f7df1e?logo=javascript&logoColor=black)
 
 ## Design
 
@@ -38,11 +37,11 @@ Three rules hold it together:
   exists, which is why there are no per-project gradients or decorative icons.
 
 Type is Archivo (display), Instrument Sans (body), and JetBrains Mono (every
-label, year, and count), sized once as tokens in `globals.css` — no
+label, year, and count), sized once as tokens in `styles.css` — no
 per-component font sizes.
 
 Backgrounds: a generated fractal-noise film grain over the whole page, plus
-three photographic textures in `public/textures/` — behind the hero, revealed on
+three photographic textures in `textures/` — behind the hero, revealed on
 hover across the About section, and behind Contact. All are desaturated and
 screen-blended at very low opacity so they read as atmosphere rather than
 pictures, and all are self-hosted rather than hotlinked.
@@ -57,116 +56,90 @@ constant-speed drift rather than the sudden motion that setting guards against.
 ## Structure
 
 ```
-src/
-├── app/
-│   ├── layout.tsx              fonts + metadata
-│   ├── page.tsx                section order
-│   ├── globals.css             design tokens + component classes
-│   ├── robots.ts, sitemap.ts
-│   └── others/layout/
-│       ├── Navbar.tsx          nav + scroll spy
-│       ├── SectionBar.tsx      section header (name + meta)
-│       └── Reveal.tsx          scroll reveals
-├── home/Hero.tsx               status strip, name, fact grid
-├── about/About.tsx, content.ts pull-quote | bio split
-├── projects/Projects.tsx       expandable work rows
-├── skills/TechStack.tsx        ticker + lined category list
-├── timeline/Timeline.tsx       log
-└── contact/Contact.tsx         contact + footer
+index.html        all content and markup
+styles.css        design tokens (:root) + component classes
+script.js         navbar, scroll reveal, accordions, log filters, ticker
+profile.jpg       profile photo
+Final Resume Chiang Xiang Zhi.pdf
+textures/         hero, about and contact background textures
+log/              images shown in opened Log entries
+projects/         Work screenshots (see below)
+robots.txt, sitemap.xml, favicon.ico
+vercel.json       security headers
 ```
 
 ## Editing content
 
-All content is plain data at the top of its section file:
+Everything is plain markup in `index.html`. Search for the section's `id`:
 
 | What | Where |
 |------|-------|
-| Name, status rows, intro | `src/home/Hero.tsx` |
-| Bio and facts | `src/about/content.ts` |
-| Projects | `projects` array in `src/projects/Projects.tsx` |
-| Project screenshots | `public/projects/` — see below |
-| Stack | `groups` array in `src/skills/TechStack.tsx` |
-| Experience, education, awards | `entries` array in `src/timeline/Timeline.tsx` |
-| Contact details | `channels` array in `src/contact/Contact.tsx` |
-| Colours, type sizes, spacing, speed | the **ADJUST ME** block at the top of `src/app/globals.css` |
-| Profile photo, resume | `public/profile.jpg`, `public/resume.pdf` |
+| Name, status rows, intro, fact grid | `<header id="home">` |
+| Bio and facts | `<section id="about">` |
+| Projects | rows inside `<section id="work">` |
+| Stack | `<section id="stack">` (the ticker repeats this list automatically) |
+| Experience, education, awards | `.log-item` rows inside `<section id="log">` |
+| Contact details | `<section id="contact">` |
+| Colours, type sizes, spacing, speed | the **ADJUST ME** block at the top of `styles.css` |
 
-Every project's `title`, `description`, and `stack` is taken from its GitHub
-README rather than written from memory — an earlier version of this list had
-drifted and claimed behaviour the code did not have.
+If you add or remove a Log entry, also update the counts on the filter tabs
+(the number beside All, Work, Education, Award, Activity). The project count in
+the Work header is edited by hand too.
 
-`href` adds a "View source" link inside the expanded panel, and `demo` adds a
-"Live demo" link plus a green marker on the collapsed row. **Verify a `demo` URL
-returns 200 before adding it** — two of the deploy URLs recorded in these repos
-now 404, and a dead link is worse than none. (Neither link can wrap the row
-itself: the row is the expand/collapse button, and an anchor inside a button is
-invalid HTML.)
-
-### Common adjustments
-
-Every visual value lives in one commented block at the top of
-`src/app/globals.css`. A few you're most likely to want:
-
-| To change | Edit |
-|---|---|
-| Size of your name | `--text-display` |
-| Page darkness | `--bg`, `--bg-alt`, `--bg-sunken` |
-| How raised the cards look | `--surface`, `--surface-alt` |
-| Corner rounding | `--radius` |
-| Content width (backgrounds stay full-bleed) | `--frame` |
-| How big body text is | `--text-prose` |
-| How big project titles are | `--text-title` |
-| Speed of the stack ticker | `--marquee-speed` (px/second; higher = faster) |
-
-If you darken `--bg`, check the contrast ratios noted beside the text colours
-and darken those to match — keep every one at 4.5:1 or better.
+Every project's description and stack comes from its GitHub README rather than
+memory. A "Live demo" link plus a green **Live** marker is added by hand to a
+project that has a working deployment — **verify the URL returns 200 first**; a
+dead link is worse than none.
 
 ### Adding a project screenshot
 
 Every project row has a preview slot. Until a screenshot exists it holds the
 language mark, so the layout is the same either way:
 
-1. Drop the image in `public/projects/` — 16:10, around 1600×1000, PNG or JPG.
-2. Add one line to that project in `src/projects/Projects.tsx`:
+1. Put the image in `projects/` — 16:10, around 1600×1000, PNG or JPG.
+2. In that project's `<div class="preview">`, replace the language-mark `<span>`
+   with:
 
-```ts
-{
-    title: "UniLink",
-    image: "/projects/unilink.png",
-    // ...
-}
+```html
+<img src="projects/unilink.png" alt="UniLink screenshot"
+     class="absolute inset-0 h-full w-full object-cover">
 ```
 
-The screenshot simply replaces the language mark in that slot. Nothing is lost:
-each project's language is also listed in its stack tags on the collapsed row.
+### Common adjustments
+
+| To change | Edit in `styles.css` |
+|---|---|
+| Size of your name | `--text-display` |
+| Page darkness | `--bg`, `--bg-alt`, `--bg-sunken` |
+| How raised the cards look | `--surface`, `--surface-alt` |
+| Corner rounding | `--radius` |
+| Content width (backgrounds stay full-bleed) | `--frame` |
+| Speed of the stack ticker | `--marquee-speed` (px/second; higher = faster) |
+
+If you darken `--bg`, check the contrast ratios noted beside the text colours and
+keep every one at 4.5:1 or better.
 
 ## Local development
+
+No install and no build. Serve the folder with any static server:
 
 ```bash
 git clone https://github.com/xiangzhi2003/Portfolio.git
 cd Portfolio
-npm install
-npm run dev
+npx serve .
 ```
 
-- `npm run dev` — dev server on http://localhost:3000
-- `npm run build` — production build
-- `npm run start` — serve the production build
-- `npm run lint` — lint
+Then open http://localhost:3000. Opening `index.html` directly also works.
 
 ## Deployment
 
-Pushes to `master` deploy automatically via Vercel.
+Pushes to `master` deploy automatically via Vercel. In the Vercel project set
+**Framework Preset: Other**, no build command, and output directory `.`.
 
-Optionally set `NEXT_PUBLIC_SITE_URL` on Vercel to the final domain — it's used
-for canonical and sitemap URLs.
+## History
 
-## Stack
-
-Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS 4 · lucide-react
-
-No animation libraries. Scroll behaviour is native CSS; reveals are a ~40-line
-IntersectionObserver component.
+The site was originally built with Next.js 16, React 19, TypeScript and
+Tailwind CSS 4. That version is preserved at the git tag `nextjs-version`.
 
 ## License
 

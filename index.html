@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chiang Xiang Zhi — Software Engineer</title>
+  <meta name="description" content="Full-stack software engineer and recent Asia Pacific University graduate with a strong focus on applied AI. Seeking a full-time role building scalable, AI-driven products.">
+  <meta name="keywords" content="Software Engineer, Chiang Xiang Zhi, Portfolio, AI, LLM, RAG, Flutter, Python, FastAPI, ASP.NET Core, AWS, APU, Kuala Lumpur">
+  <meta name="author" content="Chiang Xiang Zhi">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://chiangxiangzhi.vercel.app/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Chiang Xiang Zhi">
+  <meta property="og:title" content="Chiang Xiang Zhi — Software Engineer">
+  <meta property="og:description" content="Full-stack software engineer and recent Asia Pacific University graduate with a strong focus on applied AI. Seeking a full-time role building scalable, AI-driven products.">
+  <meta property="og:url" content="https://chiangxiangzhi.vercel.app/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Chiang Xiang Zhi — Software Engineer">
+  <meta name="twitter:description" content="Full-stack software engineer and recent Asia Pacific University graduate with a strong focus on applied AI. Seeking a full-time role building scalable, AI-driven products.">
+  <link rel="icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Instrument+Sans:wght@400..700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="antialiased">
+    <nav class="nav fixed inset-x-0 top-0 z-50" id="nav" data-scrolled="false">
+      <div class="flex h-16 items-center justify-between px-6 md:px-12">
+        <a href="#home" class="-my-3 flex items-center py-3 font-mono text-[length:var(--text-label)] tracking-[0.2em] text-[var(--fg)] transition-colors hover:text-[var(--accent)]">CXZ</a>
+        <div class="hidden items-center gap-8 md:flex"><a href="#about" class="label nav-link" data-nav="about" data-active="false">About</a><a href="#work" class="label nav-link" data-nav="work" data-active="false">Work</a><a href="#stack" class="label nav-link" data-nav="stack" data-active="false">Stack</a><a href="#log" class="label nav-link" data-nav="log" data-active="false">Log</a><a href="#contact" class="label nav-link" data-nav="contact" data-active="false">Contact</a></div>
+        <button type="button" id="menu-toggle" class="-mr-3 p-3 text-[var(--fg-muted)] transition-colors hover:text-[var(--fg)] md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="nav-sheet">
+          <span id="icon-menu"><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16"/><path d="M4 6h16"/><path d="M4 18h16"/></svg></span><span id="icon-close" hidden><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></span>
+        </button>
+      </div>
+      <div class="nav-sheet md:hidden" id="nav-sheet" data-open="false">
+        <div class="flex flex-col px-6 py-2 md:px-12"><a href="#about" class="label flex min-h-11 items-center py-3" data-nav="about" data-active="false">About</a><a href="#work" class="label flex min-h-11 items-center py-3" data-nav="work" data-active="false">Work</a><a href="#stack" class="label flex min-h-11 items-center py-3" data-nav="stack" data-active="false">Stack</a><a href="#log" class="label flex min-h-11 items-center py-3" data-nav="log" data-active="false">Log</a><a href="#contact" class="label flex min-h-11 items-center py-3" data-nav="contact" data-active="false">Contact</a></div>
+      </div>
+    </nav>
+    <main class="pt-[calc(4rem+1px)]">
+    <header id="home" class="hero">
+      <div class="status-strip rise" style="animation-delay:0ms">
+        <div class="status-strip-inner">
+          <span class="label flex items-center gap-2.5 text-[var(--fg)]"><span class="dot" aria-hidden="true"></span>Available for work</span>
+          <span class="label">Puchong, Selangor · MY</span>
+        </div>
+      </div>
+      <div class="frame px-6 pt-20 pb-16 md:px-12 md:pt-28 md:pb-20">
+        <p class="label rise" style="animation-delay:60ms">Software Engineer</p>
+        <div class="rise-mask mt-5">
+          <h1 class="display display-name text-[length:var(--text-display)]" style="animation-delay:120ms">Chiang<br>Xiang<br>Zhi</h1>
+        </div>
+        <div class="mt-10 flex flex-col gap-10 md:flex-row md:items-start md:gap-12">
+          <div class="rise relative h-40 w-40 shrink-0 overflow-hidden rounded-2xl sm:h-48 sm:w-48" style="animation-delay:200ms">
+            <img src="profile.jpg" alt="Chiang Xiang Zhi" width="192" height="192" class="absolute inset-0 h-full w-full object-cover" fetchpriority="high">
+          </div>
+          <p class="rise prose-body flex-1" style="animation-delay:260ms">Full Stack Software engineer and recent graduate with a strong focus on applied AI. I design and deliver production-ready applications end to end, integrating large language models and retrieval-augmented search to solve real user problems. Seeking a full-time role where I can build scalable, AI-driven products.</p>
+        </div>
+        <div class="rise mt-10 flex flex-wrap items-center gap-3" style="animation-delay:320ms">
+          <a href="#work" class="btn btn-primary">See the work <svg class="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></a>
+          <a href="Final%20Resume%20Chiang%20Xiang%20Zhi.pdf" class="btn" download>Resume</a>
+        </div>
+      </div>
+      <div class="frame grid grid-cols-1 gap-8 px-6 pt-4 md:grid-cols-3 md:gap-10 md:px-12"><div><p class="bracket">degree</p><p class="mt-2.5 text-[var(--fg)]">BSc (Hons) Software Engineering</p><p class="mono mt-1 text-[var(--fg-faint)]">Asia Pacific University — CGPA 3.42, Second Upper</p></div><div><p class="bracket">recent role</p><p class="mt-2.5 text-[var(--fg)]">Software IT Intern</p><p class="mono mt-1 text-[var(--fg-faint)]">IJM Corporation — Flutter</p></div><div><p class="bracket">languages</p><p class="mt-2.5 text-[var(--fg)]">English, Chinese</p><p class="mono mt-1 text-[var(--fg-faint)]">Malay, Cantonese</p></div></div>
+      <div class="frame scroll-cue px-6 py-6 md:px-12"><span class="label">Scroll</span></div>
+    </header>
+    <section id="about" class="section hover-texture" data-band="alt" data-size="sm">
+      <div class="split">
+        <div><div class="reveal" style="--reveal-delay:0ms"><p class="bracket">philosophy</p><blockquote class="quote mt-7">Get the business rules right the first time, because everything downstream inherits that decision.</blockquote></div></div>
+        <div><div class="reveal" style="--reveal-delay:80ms"><p class="bracket">background</p><div class="mt-7 space-y-5"><p class="prose-body">I&#x27;ve just finished a software engineering degree at Asia Pacific University in Kuala Lumpur, and I&#x27;m looking for my first full-time engineering role. Most recently I interned at IJM Corporation from July to November 2025, digitising manual company workflows by building and deploying internal web and mobile apps in Flutter.</p><p class="prose-body">Most of what I&#x27;ve built is domain software — a campus marketplace with escrow and AI-assisted search for my final year project, a property management portal on AWS that I led as team lead, a location-strategy tool built for KitaHack 2026 on Google Maps APIs, a parking-IoT entry for HackMY IoT 2026, and a distributed HR system over Java RMI. None of it is flashy, and all of it taught me the same thing about where the real difficulty actually lives.</p><p class="prose-body">That&#x27;s meant using whatever the problem called for — C# and WinForms on the desktop, Flutter on mobile, Java and C++ where the algorithms carried the weight, R and Python when the answer was sitting in the data. I&#x27;d rather be solid on fundamentals and pick up a framework in a week than the other way around.</p></div><dl class="mt-12 space-y-1"><div class="flex flex-col gap-1 py-2 sm:flex-row sm:items-baseline sm:gap-6"><dt class="label sm:w-36 sm:shrink-0">Looking for</dt><dd class="text-[var(--fg)]">Graduate software engineering roles / Software Related</dd></div><div class="flex flex-col gap-1 py-2 sm:flex-row sm:items-baseline sm:gap-6"><dt class="label sm:w-36 sm:shrink-0">Available</dt><dd class="text-[var(--fg)]">Immediately</dd></div></dl></div></div>
+      </div>
+    </section>
+    <section id="work" class="section">
+      <div class="section-head"><div class="section-head-inner frame"><h2 class="section-title">Work</h2><div class="section-head-meta"><span class="label">9 projects</span></div></div></div>
+      <div class="frame list-inset" data-accordion>
+        <div class="reveal" style="--reveal-delay:0ms"><div class="work-row" data-open="true">
+            <button type="button" class="work-toggle" aria-expanded="true" aria-controls="work-panel-0">
+              <div class="work-grid">
+                <span class="work-index">[01]</span>
+                <h3 class="work-title">UniLink</h3>
+                <ul class="work-tags"><li class="tag">Flutter</li><li class="tag">Dart</li><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">Supabase</li><li class="tag">Pinecone</li><li class="tag">LangChain</li><li class="tag">Gemini</li><li class="tag">Stripe</li></ul>
+                <span class="label work-platform">Final year project<span class="work-live">Live</span></span>
+                <span class="work-sign" aria-hidden="true">−</span>
+              </div>
+            </button>
+            <div id="work-panel-0" class="work-panel">
+              <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-7">
+                <div class="preview"><span class="language-mark" aria-hidden="true">Flutter</span></div>
+                <div class="min-w-0 flex-1">
+                  <p class="prose-body">A campus marketplace and rental app gated to university email addresses, so students trade textbooks and equipment inside a community that can be verified. Three parts carry the work: an AI concierge that blends RAG-based semantic search (LangChain, Pinecone, Gemini) with keyword search, an escrow vault on Stripe Connect that holds funds until handover, and a time-based QR (TOTP) handshake scanned in person to confirm both pickup and return.</p>
+                  <div class="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2"><a href="https://unilink-fyp-production-a474.up.railway.app/" target="_blank" rel="noopener noreferrer" class="link inline-flex min-h-11 items-center gap-1.5">Live demo <svg class="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a><a href="https://github.com/xiangzhi2003/UniLink---FYP" target="_blank" rel="noopener noreferrer" class="link inline-flex min-h-11 items-center gap-1.5">View source <svg class="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></div>
+                </div>
+              </div>
+            </div>
+          </div></div><div class="reveal" style="--reveal-delay:60ms"><div class="work-row" data-open="false">
+            <button type="button" class="work-toggle" aria-expanded="false" aria-controls="work-panel-1">
+              <div class="work-grid">
+                <span class="work-index">[02]</span>
+                <h3 class="work-title">Property Management Portal</h3>
+                <ul class="work-tags"><li class="tag">ASP.NET Core 8</li><li class="tag">C#</li><li class="tag">EF Core</li><li class="tag">PostgreSQL</li><li class="tag">AWS Lambda</li><li class="tag">S3</li><li class="tag">Stripe</li></ul>
+                <span class="label work-platform">Team lead</span>
+                <span class="work-sign" aria-hidden="true">+</span>
+              </div>
+            </button>
+            <div id="work-panel-1" class="work-panel" hidden>
+              <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-7">
+                <div class="preview"><span class="language-mark" aria-hidden="true">C#</span></div>
+                <div class="min-w-0 flex-1">
+                  <p class="prose-body">A cloud computing team project I led. Properties, tenants, maintenance requests and payments across four separate role panels — admin, property manager, tenant, and maintenance staff — each seeing only what its role should. Sign-in runs through ASP.NET Identity or Google OAuth, and photo uploads go to S3 through a presigned URL issued by a Lambda behind API Gateway.</p>
+                  <div class="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2"><a href="https://github.com/xiangzhi2003/PropertyManagementPortal" target="_blank" rel="noopener noreferrer" class="link inline-flex min-h-11 items-center gap-1.5">View source <svg class="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></div>
+                </div>
+              </div>
+            </div>
+          </div></div><div class="reveal" style="--reveal-delay:120ms"><div class="work-row" data-open="false">
+            <button type="button" class="work-toggle" aria-expanded="false" aria-controls="work-panel-2">
+              <div class="work-grid">
+                <span class="work-index">[03]</span>
+                <h3 class="work-title">GapMap</h3>
+                <ul class="work-tags"><li class="tag">Next.js</li><li class="tag">React 19</li><li class="tag">TypeScript</li><li class="tag">Tailwind</li><li class="tag">Gemini</li><li class="tag">Firebase</li></ul>
+                <span class="label work-platform">KitaHack 2026<span class="work-live">Live</span></span>
+                <span class="work-sign" aria-hidden="true">+</span>
+              </div>
+            </button>
+            <div id="work-panel-2" class="work-panel" hidden>
+              <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-7">
+                <div class="preview"><span class="language-mark" aria-hidden="true">TypeScript</span></div>
+                <div class="min-w-0 flex-1">
+                  <p class="prose-body">Built for KitaHack 2026 around the UN Sustainable Development Goals using Google Cloud technologies. Answers &quot;where should I open this business?&quot; from a plain-English question. The query is classified into a structured intent, nearby competitors are pulled live from Google Places, and the result comes back as red, orange and green zones with real coordinates and radii drawn onto the map. Built across eight Google Maps Platform APIs.</p>
+                  <div class="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2"><a href="https://gapmap.vercel.app" target="_blank" rel="noopener noreferrer" class="link inline-flex min-h-11 items-center gap-1.5">Live demo <svg class="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a><a href="https://github.com/xiangzhi2003/GapMap" target="_blank" rel="noopener noreferrer" class="link inline-flex min-h-11 items-center gap-1.5">View source <svg class="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></div>
+                </div>
+              </div>
+            </div>
+          </div></div><div class="reveal" style="--reveal-delay:180ms"><div class="work-row" data-open="false">
+            <button type="button" class="work-toggle" aria-expanded="false" aria-controls="work-panel-3">
+              <div class="work-grid">
+                <span class="work-index">[04]</span>
+                <h3 class="work-title">Next-Gen Parking</h3>
+                <ul class="work-tags"><li class="tag">JavaScript</li><li class="tag">HTML</li><li class="tag">CSS</li><li class="tag">Python</li><li class="tag">FastAPI</li></ul>
+                <span class="label work-platform">HackMY IoT 2026</span>
+                <span class="work-sign" aria-hidden="true">+</span>
+              </div>
+            </button>
+            <div id="work-panel-3" class="work-panel" hidden>
+              <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-7">
+                <div class="preview"><span class="language-mark" aria-hidden="true">JavaScript</span></div>
+                <div class="min-w-0 flex-1">
+                  <p class="prose-body">Entry for the Industrial &amp; Asset IoT track (Track 2) of the HackMY IoT hackathon at Monash University Malaysia, September 2026. Built with a JavaScript, HTML and CSS front end and a Python FastAPI backend.</p>
+                  <div class="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2"></div>
+                </div>
+              </div>
+            </div>
+          </div></div><div class="reveal" style="--reveal-delay:180ms"><div class="work-row" data-open="false">
+            <button type="button" class="work-toggle" aria-expanded="false" aria-controls="work-panel-4">
+              <div class="work-grid">
+                <span class="work-index">[05]</span>
+                <h3 class="work-title">Secondhand Marketplace App</h3>
+                <ul class="work-tags"><li class="tag">Flutter</li><li class="tag">Dart</li><li class="tag">Firebase</li></ul>
+                <span class="label work-platform">Mobile</span>
+                <span class="work-sign" aria-hidden="true">+</span>
+              </div>
+            </button>
+            <div id="work-panel-4" class="work-panel" hidden>
+              <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-7">
+                <div class="preview"><span class="language-mark" aria-hidden="true">Flutter</span></div>
+                <div class="min-w-0 flex-1">
+                  <p class="prose-body">A secondhand marketplace app connecting admins, buyers and sellers. Designed, tested and documented from user research as a university project.</p>
+                  <div class="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2"></div>
+                </div>
+              </div>
+            </div>
+          </div></div><div class="reveal" style="--reveal-delay:180ms"><div class="work-row" data-open="false">
+            <button type="button" class="work-toggle" aria-expanded="false" aria-controls="work-panel-5">
+              <div class="work-grid">
+                <span class="work-index">[06]</span>
+                <h3 class="work-title">Distributed HRM System</h3>
+                <ul class="work-tags"><li class="tag">Java</li><li class="tag">Java RMI</li><li class="tag">Firebase</li><li class="tag">SMTP</li></ul>
+                <span class="label work-platform">Distributed</span>
+                <span class="work-sign" aria-hidden="true">+</span>
+              </div>
+            </button>
+            <div id="work-panel-5" class="work-panel" hidden>
+              <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-7">
+                <div class="preview"><span class="language-mark" aria-hidden="true">Java</span></div>
+                <div class="min-w-0 flex-1">
+                  <p class="prose-body">A client–server HR system where the client calls remote objects over Java RMI rather than talking to the database itself. The server exposes a remote interface, resolves authentication against Firebase, and sends notification mail over SMTP — an exercise in remote interfaces, serialization, and keeping a service usable when part of it fails.</p>
+                  <div class="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2"><a href="https://github.com/xiangzhi2003/BHEL-Distributed-HRM-System-Java-RMI-HR-Management" target="_blank" rel="noopener noreferrer" class="link inline-flex min-h-11 items-center gap-1.5">View source <svg class="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></div>
+                </div>
+              </div>
+            </div>
+          </div></div><div class="reveal" style="--reveal-delay:180ms"><div class="work-row" data-open="false">
+            <button type="button" class="work-toggle" aria-expanded="false" aria-controls="work-panel-6">
+              <div class="work-grid">
+                <span class="work-index">[07]</span>
+                <h3 class="work-title">E-Commerce Analysis Algorithms</h3>
+                <ul class="work-tags"><li class="tag">C++</li><li class="tag">Data Structures</li><li class="tag">Algorithms</li></ul>
+                <span class="label work-platform">Console</span>
+                <span class="work-sign" aria-hidden="true">+</span>
+              </div>
+            </button>
+            <div id="work-panel-6" class="work-panel" hidden>
+              <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-7">
+                <div class="preview"><span class="language-mark" aria-hidden="true">C++</span></div>
+                <div class="min-w-0 flex-1">
+                  <p class="prose-body">Cleans and validates raw transaction and review CSVs, then analyses them twice over — once through a hand-written dynamic array and once through a linked list — so the two implementations can be measured against each other on the same sorting and searching work. No standard library containers.</p>
+                  <div class="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2"><a href="https://github.com/xiangzhi2003/E-Commerce-Analysis-Algorithm" target="_blank" rel="noopener noreferrer" class="link inline-flex min-h-11 items-center gap-1.5">View source <svg class="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></div>
+                </div>
+              </div>
+            </div>
+          </div></div><div class="reveal" style="--reveal-delay:180ms"><div class="work-row" data-open="false">
+            <button type="button" class="work-toggle" aria-expanded="false" aria-controls="work-panel-7">
+              <div class="work-grid">
+                <span class="work-index">[08]</span>
+                <h3 class="work-title">Electric Vehicle Data Analysis</h3>
+                <ul class="work-tags"><li class="tag">JavaScript</li><li class="tag">Node.js</li><li class="tag">HTML</li><li class="tag">CSS</li></ul>
+                <span class="label work-platform">CLI &amp; web</span>
+                <span class="work-sign" aria-hidden="true">+</span>
+              </div>
+            </button>
+            <div id="work-panel-7" class="work-panel" hidden>
+              <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-7">
+                <div class="preview"><span class="language-mark" aria-hidden="true">JavaScript</span></div>
+                <div class="min-w-0 flex-1">
+                  <p class="prose-body">Processes a 3,022-record dataset of electric and plug-in vehicles under a deliberate constraint: no map, filter, reduce, or sort. Everything is written with explicit loops and mutable state, which is the point — the assignment isolates the imperative paradigm so it can be compared against a functional version of the same problem.</p>
+                  <div class="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2"><a href="https://github.com/xiangzhi2003/Exploring-Programming-Paradigms-with-Elective-Vehicles-and-plug-in-models-Data-" target="_blank" rel="noopener noreferrer" class="link inline-flex min-h-11 items-center gap-1.5">View source <svg class="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></div>
+                </div>
+              </div>
+            </div>
+          </div></div><div class="reveal" style="--reveal-delay:180ms"><div class="work-row" data-open="false">
+            <button type="button" class="work-toggle" aria-expanded="false" aria-controls="work-panel-8">
+              <div class="work-grid">
+                <span class="work-index">[09]</span>
+                <h3 class="work-title">Tuition Centre Management System</h3>
+                <ul class="work-tags"><li class="tag">Python</li></ul>
+                <span class="label work-platform">Console</span>
+                <span class="work-sign" aria-hidden="true">+</span>
+              </div>
+            </button>
+            <div id="work-panel-8" class="work-panel" hidden>
+              <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-7">
+                <div class="preview"><span class="language-mark" aria-hidden="true">Python</span></div>
+                <div class="min-w-0 flex-1">
+                  <p class="prose-body">A command-line system for a tuition centre, built as a first-year group project. Each role signs in to its own set of functions, with records kept in plain text files rather than a database — an early exercise in structuring a program around who is using it.</p>
+                  <div class="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2"><a href="https://github.com/xiangzhi2003/Tuition-Centre-Management-System" target="_blank" rel="noopener noreferrer" class="link inline-flex min-h-11 items-center gap-1.5">View source <svg class="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></div>
+                </div>
+              </div>
+            </div>
+          </div></div>
+      </div>
+      <div>
+        <div class="frame px-6 py-9 md:px-12">
+          <a href="https://github.com/xiangzhi2003" target="_blank" rel="noopener noreferrer" class="btn"><svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg> Source on GitHub <svg class="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+        </div>
+      </div>
+    </section>
+    <section id="stack" class="section" data-band="alt">
+      <div class="section-head"><div class="section-head-inner frame"><h2 class="section-title">Stack</h2><div class="section-head-meta"><span class="label">43 technologies</span></div></div></div>
+      <div class="marquee py-10 md:py-14"><div class="marquee-track" id="ticker-track" aria-hidden="true"><span class="flex items-center gap-10"><span class="tech">C#</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">Java</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">Dart</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">Python</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">TypeScript</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">JavaScript</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">HTML</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">CSS</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">C++</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">R</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">SQL</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">ASP.NET Core</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">Flutter</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">Next.js</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">React</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">FastAPI</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">Node.js</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">WinForms</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">Tailwind</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">PostgreSQL</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">Microsoft SQL Server</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">MySQL</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">SQLite</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">Firebase</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">Supabase</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">NeonDB</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">AWS</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">Docker</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">Git</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">GitHub</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">Visual Studio</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">Android Studio</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">VS Code</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">NetBeans</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">PyCharm</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">Vercel</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">Railway</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">Pinecone</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">LangChain (RAG)</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">Cursor</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">Antigravity</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">Codex</span><span class="tech-sep">◆</span></span><span class="flex items-center gap-10"><span class="tech">Claude Code</span><span class="tech-sep">◆</span></span></div></div>
+      <div class="stack-list"><div class="reveal" style="--reveal-delay:0ms"><div class="stack-row"><h3 class="stack-name">Languages</h3><ul class="stack-items"><li>C#</li><li>Java</li><li>Dart</li><li>Python</li><li>TypeScript</li><li>JavaScript</li><li>HTML</li><li>CSS</li><li>C++</li><li>R</li><li>SQL</li></ul></div></div><div class="reveal" style="--reveal-delay:60ms"><div class="stack-row"><h3 class="stack-name">Frameworks</h3><ul class="stack-items"><li>ASP.NET Core</li><li>Flutter</li><li>Next.js</li><li>React</li><li>FastAPI</li><li>Node.js</li><li>WinForms</li><li>Tailwind</li></ul></div></div><div class="reveal" style="--reveal-delay:120ms"><div class="stack-row"><h3 class="stack-name">Data &amp; cloud</h3><ul class="stack-items"><li>PostgreSQL</li><li>Microsoft SQL Server</li><li>MySQL</li><li>SQLite</li><li>Firebase</li><li>Supabase</li><li>NeonDB</li><li>AWS</li><li>Docker</li></ul></div></div><div class="reveal" style="--reveal-delay:180ms"><div class="stack-row"><h3 class="stack-name">Tooling</h3><ul class="stack-items"><li>Git</li><li>GitHub</li><li>Visual Studio</li><li>Android Studio</li><li>VS Code</li><li>NetBeans</li><li>PyCharm</li><li>Vercel</li><li>Railway</li><li>Pinecone</li><li>LangChain (RAG)</li><li>Cursor</li><li>Antigravity</li><li>Codex</li><li>Claude Code</li></ul></div></div></div>
+    </section>
+    <section id="log" class="section">
+      <div class="section-head"><div class="section-head-inner frame"><h2 class="section-title">Log</h2><div class="section-head-meta"><div id="log-tabs" role="tablist" aria-label="Filter log by kind" class="filter-tabs" data-fade="none"><button type="button" role="tab" aria-selected="true" data-filter="All" class="label filter-tab">All<span class="ml-1.5 opacity-60">10</span></button><button type="button" role="tab" aria-selected="false" data-filter="Work" class="label filter-tab">Work<span class="ml-1.5 opacity-60">3</span></button><button type="button" role="tab" aria-selected="false" data-filter="Education" class="label filter-tab">Education<span class="ml-1.5 opacity-60">1</span></button><button type="button" role="tab" aria-selected="false" data-filter="Award" class="label filter-tab">Award<span class="ml-1.5 opacity-60">4</span></button><button type="button" role="tab" aria-selected="false" data-filter="Activity" class="label filter-tab">Activity<span class="ml-1.5 opacity-60">2</span></button><span aria-hidden="true" class="filter-indicator" id="log-indicator"></span></div></div></div></div>
+      <div class="frame list-inset" data-accordion id="log-list">
+        <div class="log-item" data-kind="Award"><div class="reveal" style="--reveal-delay:0ms"><div class="work-row" data-open="true">
+            <button type="button" class="work-toggle" aria-expanded="true" aria-controls="log-panel-0">
+              <div class="log-grid">
+                <div class="log-meta"><span class="log-period mono text-[var(--fg)]">Sep 2026</span><span class="badge">Award</span></div>
+                <h3 class="entry-title log-title">HackMY IoT 2026 — Track 2</h3>
+                <p class="label log-org">Monash University Malaysia</p>
+                <span class="work-sign log-sign" aria-hidden="true">−</span>
+              </div>
+            </button>
+            <div id="log-panel-0" class="work-panel">
+              <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-7">
+                <a href="log/hackmy-iot-2026.jpg" target="_blank" rel="noopener noreferrer" class="log-image shrink-0" aria-label="View full image: Participants and organisers at the Hack MY IoT hackathon, September 19–20, 2026, at Monash University Malaysia"><img src="log/hackmy-iot-2026.jpg" alt="Participants and organisers at the Hack MY IoT hackathon, September 19–20, 2026, at Monash University Malaysia" width="1600" height="1067" loading="lazy" class="h-auto w-full"></a><p class="log-detail prose-body min-w-0 flex-1">Entered the Industrial &amp; Asset IoT track with &quot;Next-Gen Parking&quot;.</p>
+              </div>
+            </div>
+          </div></div></div><div class="log-item" data-kind="Activity"><div class="reveal" style="--reveal-delay:60ms"><div class="work-row" data-open="false">
+            <button type="button" class="work-toggle" aria-expanded="false" aria-controls="log-panel-1">
+              <div class="log-grid">
+                <div class="log-meta"><span class="log-period mono text-[var(--fg)]">2026</span><span class="badge">Activity</span></div>
+                <h3 class="entry-title log-title">GapMap — KitaHack 2026</h3>
+                <p class="label log-org">KitaHack, National Hackathon</p>
+                <span class="work-sign log-sign" aria-hidden="true">+</span>
+              </div>
+            </button>
+            <div id="log-panel-1" class="work-panel" hidden>
+              <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-7">
+                <a href="log/kitahack-2026-certificate.jpg" target="_blank" rel="noopener noreferrer" class="log-image shrink-0" aria-label="View full image: KitaHack 2026 certificate of appreciation awarded to Chiang Xiang Zhi as a participant"><img src="log/kitahack-2026-certificate.jpg" alt="KitaHack 2026 certificate of appreciation awarded to Chiang Xiang Zhi as a participant" width="1600" height="1132" loading="lazy" class="h-auto w-full"></a><p class="log-detail prose-body min-w-0 flex-1">Took part in KitaHack 2026 with GapMap, a project targeting the UN Sustainable Development Goals using Google Cloud technologies. Received a certificate of appreciation as a participant.</p>
+              </div>
+            </div>
+          </div></div></div><div class="log-item" data-kind="Education"><div class="reveal" style="--reveal-delay:120ms"><div class="work-row" data-open="false">
+            <button type="button" class="work-toggle" aria-expanded="false" aria-controls="log-panel-2">
+              <div class="log-grid">
+                <div class="log-meta"><span class="log-period mono text-[var(--fg)]">Completed 2026</span><span class="badge">Education</span></div>
+                <h3 class="entry-title log-title">BSc (Hons) Software Engineering</h3>
+                <p class="label log-org">Asia Pacific University<span class="text-[var(--fg-faint)]"> · Kuala Lumpur</span></p>
+                <span class="work-sign log-sign" aria-hidden="true">+</span>
+              </div>
+            </button>
+            <div id="log-panel-2" class="work-panel" hidden>
+              <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-7">
+                <p class="log-detail prose-body min-w-0 flex-1">Software design, data structures, algorithms, and database systems. Graduated with a CGPA of 3.42 (Second Upper).</p>
+              </div>
+            </div>
+          </div></div></div><div class="log-item" data-kind="Activity"><div class="reveal" style="--reveal-delay:180ms"><div class="work-row" data-open="false">
+            <button type="button" class="work-toggle" aria-expanded="false" aria-controls="log-panel-3">
+              <div class="log-grid">
+                <div class="log-meta"><span class="log-period mono text-[var(--fg)]">Dec 2023 – Feb 2025</span><span class="badge">Activity</span></div>
+                <h3 class="entry-title log-title">Committee Member</h3>
+                <p class="label log-org">OperationClub, APU</p>
+                <span class="work-sign log-sign" aria-hidden="true">+</span>
+              </div>
+            </button>
+            <div id="log-panel-3" class="work-panel" hidden>
+              <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-7">
+                <p class="log-detail prose-body min-w-0 flex-1">Committee member in the Operations Department, helping run club events and activities. Also a member of the Chinese Club.</p>
+              </div>
+            </div>
+          </div></div></div><div class="log-item" data-kind="Work"><div class="reveal" style="--reveal-delay:180ms"><div class="work-row" data-open="false">
+            <button type="button" class="work-toggle" aria-expanded="false" aria-controls="log-panel-4">
+              <div class="log-grid">
+                <div class="log-meta"><span class="log-period mono text-[var(--fg)]">Jul – Nov 2025</span><span class="badge">Work</span></div>
+                <h3 class="entry-title log-title">Software IT Intern</h3>
+                <p class="label log-org">IJM Corporation<span class="text-[var(--fg-faint)]"> · Malaysia</span></p>
+                <span class="work-sign log-sign" aria-hidden="true">+</span>
+              </div>
+            </button>
+            <div id="log-panel-4" class="work-panel" hidden>
+              <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-7">
+                <p class="log-detail prose-body min-w-0 flex-1">Digitised manual company workflows by developing and deploying custom internal web and mobile applications in Flutter.</p>
+              </div>
+            </div>
+          </div></div></div><div class="log-item" data-kind="Work"><div class="reveal" style="--reveal-delay:180ms"><div class="work-row" data-open="false">
+            <button type="button" class="work-toggle" aria-expanded="false" aria-controls="log-panel-5">
+              <div class="log-grid">
+                <div class="log-meta"><span class="log-period mono text-[var(--fg)]">2022 – 2026</span><span class="badge">Work</span></div>
+                <h3 class="entry-title log-title">Event Crew &amp; Promoter</h3>
+                <p class="label log-org">Sime Darby, Guardian, IME, Astro, Sunway Pyramid<span class="text-[var(--fg-faint)]"> · Malaysia</span></p>
+                <span class="work-sign log-sign" aria-hidden="true">+</span>
+              </div>
+            </button>
+            <div id="log-panel-5" class="work-panel" hidden>
+              <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-7">
+                <p class="log-detail prose-body min-w-0 flex-1">Weekend brand activations — setup, registration, product demos, and handling customer questions directly on the floor.</p>
+              </div>
+            </div>
+          </div></div></div><div class="log-item" data-kind="Award"><div class="reveal" style="--reveal-delay:180ms"><div class="work-row" data-open="false">
+            <button type="button" class="work-toggle" aria-expanded="false" aria-controls="log-panel-6">
+              <div class="log-grid">
+                <div class="log-meta"><span class="log-period mono text-[var(--fg)]">Dec 2024</span><span class="badge">Award</span></div>
+                <h3 class="entry-title log-title">Top 10 Shortlisted</h3>
+                <p class="label log-org">Joget NextGenHack, APU</p>
+                <span class="work-sign log-sign" aria-hidden="true">+</span>
+              </div>
+            </button>
+            <div id="log-panel-6" class="work-panel" hidden>
+              <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-7">
+                <p class="log-detail prose-body min-w-0 flex-1">Shortlisted in the top ten of a low-code / no-code enterprise solutions challenge.</p>
+              </div>
+            </div>
+          </div></div></div><div class="log-item" data-kind="Work"><div class="reveal" style="--reveal-delay:180ms"><div class="work-row" data-open="false">
+            <button type="button" class="work-toggle" aria-expanded="false" aria-controls="log-panel-7">
+              <div class="log-grid">
+                <div class="log-meta"><span class="log-period mono text-[var(--fg)]">Jun – Sep 2023</span><span class="badge">Work</span></div>
+                <h3 class="entry-title log-title">Digital Marketer Intern</h3>
+                <p class="label log-org">Cereals Project, Shopee Malaysia Store</p>
+                <span class="work-sign log-sign" aria-hidden="true">+</span>
+              </div>
+            </button>
+            <div id="log-panel-7" class="work-panel" hidden>
+              <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-7">
+                <p class="log-detail prose-body min-w-0 flex-1">Optimised Shopee product listings and created digital marketing content, while supporting and tracking the performance of online sales campaigns.</p>
+              </div>
+            </div>
+          </div></div></div><div class="log-item" data-kind="Award"><div class="reveal" style="--reveal-delay:180ms"><div class="work-row" data-open="false">
+            <button type="button" class="work-toggle" aria-expanded="false" aria-controls="log-panel-8">
+              <div class="log-grid">
+                <div class="log-meta"><span class="log-period mono text-[var(--fg)]">2020</span><span class="badge">Award</span></div>
+                <h3 class="entry-title log-title">Honorable Mention</h3>
+                <p class="label log-org">International Kangaroo Math Competition</p>
+                <span class="work-sign log-sign" aria-hidden="true">+</span>
+              </div>
+            </button>
+            <div id="log-panel-8" class="work-panel" hidden>
+              <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-7">
+                <p class="log-detail prose-body min-w-0 flex-1">Recognised in the international round of the competition.</p>
+              </div>
+            </div>
+          </div></div></div><div class="log-item" data-kind="Award"><div class="reveal" style="--reveal-delay:180ms"><div class="work-row" data-open="false">
+            <button type="button" class="work-toggle" aria-expanded="false" aria-controls="log-panel-9">
+              <div class="log-grid">
+                <div class="log-meta"><span class="log-period mono text-[var(--fg)]">Certificate</span><span class="badge">Award</span></div>
+                <h3 class="entry-title log-title">Safe Internet &amp; Cybercrime Awareness</h3>
+                <p class="label log-org">Digi Yellow Heart</p>
+                <span class="work-sign log-sign" aria-hidden="true">+</span>
+              </div>
+            </button>
+            <div id="log-panel-9" class="work-panel" hidden>
+              <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-7">
+                <p class="log-detail prose-body min-w-0 flex-1">Completed the Digi Yellow Heart online-safety and cybercrime awareness programme.</p>
+              </div>
+            </div>
+          </div></div></div>
+      </div>
+      <div>
+        <div class="frame px-6 py-9 md:px-12"><a href="Final%20Resume%20Chiang%20Xiang%20Zhi.pdf" download class="btn">Download resume (PDF)</a></div>
+      </div>
+    </section>
+    <section id="contact" class="section contours" data-band="alt">
+      <div class="section-head"><div class="section-head-inner frame"><h2 class="section-title">Contact</h2></div></div>
+      <div class="split">
+        <div><div class="reveal" style="--reveal-delay:0ms"><h2 class="statement">Open to graduate software engineering roles.</h2><p class="prose-body mt-7">If you&#x27;re hiring, or you want to talk through something I&#x27;ve built, email is the fastest way to reach me — I reply within a day.</p></div></div>
+        <div><div class="reveal" style="--reveal-delay:80ms"><div class="flex flex-col gap-3"><a href="mailto:xiangzhichiang2003@gmail.com" class="card"><span class="min-w-0"><span class="bracket block">email</span><span class="mt-2 block truncate text-[var(--fg)]">xiangzhichiang2003@gmail.com</span></span><span class="card-arrow" aria-hidden="true">→</span></a><a href="tel:+60182758288" class="card"><span class="min-w-0"><span class="bracket block">phone</span><span class="mt-2 block truncate text-[var(--fg)]">+60 18-275 8288</span></span><span class="card-arrow" aria-hidden="true">→</span></a><a href="https://github.com/xiangzhi2003" class="card" target="_blank" rel="noopener noreferrer"><span class="min-w-0"><span class="bracket block">github</span><span class="mt-2 block truncate text-[var(--fg)]">github.com/xiangzhi2003</span></span><span class="card-arrow" aria-hidden="true">→</span></a><a href="https://www.linkedin.com/in/xiang-zhi-chiang-6723a9299/" class="card" target="_blank" rel="noopener noreferrer"><span class="min-w-0"><span class="bracket block">linkedin</span><span class="mt-2 block truncate text-[var(--fg)]">linkedin.com/in/xiang-zhi-chiang</span></span><span class="card-arrow" aria-hidden="true">→</span></a></div></div></div>
+      </div>
+    </section>
+    <footer>
+      <div class="frame flex flex-col gap-3 px-6 py-8 sm:flex-row sm:items-center sm:justify-between md:px-12">
+        <p class="label">© <span id="year">2026</span> Chiang Xiang Zhi</p>
+        <p class="label">Puchong, Selangor · MY</p>
+      </div>
+    </footer>
+    </main>
+    <div class="grain" aria-hidden="true"></div>
+    <script src="script.js" defer></script>
+</body>
+</html>
