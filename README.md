@@ -108,13 +108,11 @@ language mark, so the layout is the same either way:
 
 1. Put the image in `src/assets/images/projects/` — 16:10, around 1600×1000,
    PNG or JPG.
-2. In that project's `<div class="preview">`, replace the language-mark `<span>`
-   with:
-
-```html
-<img src="assets/images/projects/unilink.png" alt="UniLink screenshot"
-     class="absolute inset-0 h-full w-full object-cover">
-```
+2. In that project's `id="work-panel-N"`, replace the `<div class="preview">`
+   with the slider markup used by the UniLink and GapMap rows
+   (`<div class="slider" data-slider ...>`). Give it one `<figure class="slide">`
+   per image: a single image shows no arrows, several show arrows, dots and
+   swipe. Every image is wrapped in a link, so it opens full size on click.
 
 ### Common adjustments
 

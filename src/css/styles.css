@@ -1611,3 +1611,166 @@ body {
   }
 }
 
+/* Screenshot slider: one image at a time, shown whole, no frame behind it. */
+.slider {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .slider {
+    width: 26rem;
+  }
+}
+
+/* Its height follows the image on screen; script.js sets it. */
+.slider-view {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  touch-action: pan-y;
+  transition: height 400ms var(--ease);
+}
+
+.slider-track {
+  display: flex;
+  align-items: flex-start;
+  transition: transform 500ms var(--ease);
+}
+
+.slide {
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.slide a {
+  display: block;
+  max-width: 100%;
+  cursor: zoom-in;
+}
+
+.slide img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 30rem;
+  border-radius: 10px;
+}
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-top: -1.125rem;
+  border-radius: 999px;
+  background: rgba(11, 11, 9, 0.7);
+  color: var(--fg);
+  cursor: pointer;
+  transition:
+    background-color 200ms var(--ease),
+    color 200ms var(--ease);
+}
+
+.slider-btn svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.slider-btn:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.slider-prev {
+  left: 0.5rem;
+}
+
+.slider-next {
+  right: 0.5rem;
+}
+
+.slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.35rem;
+  margin-top: 0.4rem;
+}
+
+/* The dot is 44px tall for touch; the visible mark is its pseudo-element. */
+.slider-dot {
+  position: relative;
+  width: 1.75rem;
+  height: 2.25rem;
+  cursor: pointer;
+}
+
+.slider-dot::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 50%;
+  background: rgba(240, 242, 238, 0.25);
+  transition:
+    background-color 200ms var(--ease),
+    transform 200ms var(--ease);
+}
+
+.slider-dot[aria-current="true"]::before {
+  background: var(--accent);
+  transform: scale(1.25);
+}
+
+/* Every screenshot opens full size on click. */
+a.preview,
+.log-image {
+  cursor: zoom-in;
+}
+
+/* A slider with one image has nothing to step through. */
+.slider[data-single="true"] .slider-btn,
+.slider[data-single="true"] .slider-dots {
+  display: none;
+}
+
+.profile-link {
+  position: absolute;
+  inset: 0;
+  display: block;
+  cursor: zoom-in;
+}
+
+/* Organisation logo beside the name in a Log row. */
+.log-org--logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.org-logo {
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+}
+
+/* Logo beside a hero fact (recent role). */
+.fact-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-top: 0.625rem;
+}
+
+.org-logo--lg {
+  width: 2.75rem;
+  height: 2.75rem;
+}

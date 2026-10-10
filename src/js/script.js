@@ -104,6 +104,72 @@
     });
   });
 
+  /* ----------------------------------------------------------- sliders */
+
+  $$("[data-slider]").forEach((slider) => {
+    const track = $(".slider-track", slider);
+    const slides = $$(".slide", slider);
+    const dots = $$(".slider-dot", slider);
+    const view = $(".slider-view", slider);
+    let index = 0;
+
+    if (slides.length < 2) slider.dataset.single = "true";
+
+    // The viewport is exactly as tall as the image on screen.
+    const fit = () => {
+      const height = slides[index].offsetHeight;
+      view.style.height = height > 0 ? `${height}px` : "";
+    };
+
+    const show = (next) => {
+      index = (next + slides.length) % slides.length;
+      track.style.transform = `translateX(${-index * 100}%)`;
+      slides.forEach((slide, i) => slide.setAttribute("aria-hidden", String(i !== index)));
+      dots.forEach((dot, i) => dot.setAttribute("aria-current", String(i === index)));
+      fit();
+    };
+
+    $$("img", slider).forEach((img) => img.addEventListener("load", fit));
+    window.addEventListener("resize", fit);
+
+    $(".slider-prev", slider).addEventListener("click", () => show(index - 1));
+    $(".slider-next", slider).addEventListener("click", () => show(index + 1));
+    dots.forEach((dot, i) => dot.addEventListener("click", () => show(i)));
+
+    // Swipe on touch screens.
+    let startX = null;
+    let swiped = false;
+    view.addEventListener("pointerdown", (event) => {
+      startX = event.clientX;
+      swiped = false;
+    });
+    view.addEventListener("pointerup", (event) => {
+      if (startX === null) return;
+      const delta = event.clientX - startX;
+      startX = null;
+      if (Math.abs(delta) > 40) {
+        swiped = true;
+        show(index + (delta < 0 ? 1 : -1));
+      }
+    });
+    // A swipe must not also count as a click that opens the image.
+    view.addEventListener(
+      "click",
+      (event) => {
+        if (swiped) {
+          event.preventDefault();
+          swiped = false;
+        }
+      },
+      true,
+    );
+    view.addEventListener("pointercancel", () => {
+      startX = null;
+    });
+
+    show(0);
+  });
+
   /* ------------------------------------------------------- log filters */
 
   const tabsBox = $("#log-tabs");
