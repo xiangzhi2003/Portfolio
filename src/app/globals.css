@@ -733,33 +733,104 @@ body {
   and title go accent, the divider tints, and the detail text lifts. Same
   behaviour as the work rows so both indexes respond identically.
 */
-/* Log entries are cards too, matching the work rows. */
-.log-row {
-  background: var(--surface);
-  border-radius: var(--radius);
-  transition: background-color 240ms var(--ease);
+/*
+  Log entries reuse the work-row card, toggle and +/- sign. Only the collapsed
+  grid differs: period and kind on the left, title and organisation beside them.
+*/
+.log-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 0.75rem 1rem;
 }
 
-.section[data-band="alt"] .log-row {
-  background: var(--surface-alt);
+.log-meta {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-.log-row:hover {
-  background: #1e2019;
+.log-sign {
+  grid-column: 2;
+  grid-row: 1;
 }
 
-.log-row:hover .entry-title,
-.log-row:hover .log-period {
+.log-title,
+.log-org {
+  grid-column: 1 / -1;
+}
+
+/*
+  Wide screens follow the work rows: period and kind on the left, title in the
+  middle, the organisation set as a label on the right (where a project's
+  platform sits), then the +/- sign.
+*/
+@media (min-width: 1024px) {
+  .log-grid {
+    grid-template-columns: 11rem minmax(0, 1fr) 13rem 2rem;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .log-meta {
+    grid-column: 1;
+    grid-row: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  .log-title {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .log-org {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: start;
+  }
+
+  .log-sign {
+    grid-column: 4;
+    grid-row: 1;
+    justify-self: end;
+  }
+}
+
+.work-toggle:hover .entry-title,
+.work-toggle:hover .log-period,
+.work-row[data-open="true"] .log-period {
   color: var(--accent);
 }
 
-.log-row:hover .log-detail {
+.work-toggle:hover .badge:not([data-current="true"]) {
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
   color: var(--fg);
 }
 
-.log-row:hover .badge:not([data-current="true"]) {
-  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
-  color: var(--fg);
+.log-image {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--bg-sunken);
+}
+
+.log-image img {
+  transition: transform 620ms var(--ease);
+}
+
+.log-image:hover img {
+  transform: scale(1.03);
+}
+
+@media (min-width: 768px) {
+  .log-image {
+    width: 22rem;
+  }
 }
 
 .log-period,

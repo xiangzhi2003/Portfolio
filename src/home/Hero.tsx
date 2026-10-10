@@ -98,10 +98,7 @@ export function Hero() {
                         See the work
                         <ArrowDown className="h-3.5 w-3.5" strokeWidth={2.5} />
                     </a>
-                    <a href="mailto:xiangzhichiang2003@gmail.com" className="btn">
-                        Email me
-                    </a>
-                    <a href="/resume.pdf" className="btn" download="Final Resume Chiang Xiang Zhi.pdf">
+                    <a href="/Final%20Resume%20Chiang%20Xiang%20Zhi.pdf" className="btn" download>
                         Resume
                     </a>
                 </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 import { Reveal } from "@/app/others/layout/Reveal";
 import { SectionBar } from "@/app/others/layout/SectionBar";
 
@@ -19,6 +20,8 @@ interface Entry {
     organization: string;
     location?: string;
     description: string;
+    /** Optional picture shown in the opened entry, in public/log/. Links to the full image. */
+    image?: { src: string; alt: string; width: number; height: number };
     /** Fills the badge brass. Set this on your role once you start one. */
     current?: boolean;
 }
@@ -31,6 +34,26 @@ const entries: Entry[] = [
         organization: "Monash University Malaysia",
         description:
             "Entered the Industrial & Asset IoT track with \"Next-Gen Parking\".",
+        image: {
+            src: "/log/hackmy-iot-2026.jpg",
+            alt: "Participants and organisers at the Hack MY IoT hackathon, September 19–20, 2026, at Monash University Malaysia",
+            width: 1600,
+            height: 1067,
+        },
+    },
+    {
+        kind: "Activity",
+        period: "2026",
+        title: "GapMap — KitaHack 2026",
+        organization: "KitaHack, National Hackathon",
+        description:
+            "Took part in KitaHack 2026 with GapMap, a project targeting the UN Sustainable Development Goals using Google Cloud technologies. Received a certificate of appreciation as a participant.",
+        image: {
+            src: "/log/kitahack-2026-certificate.jpg",
+            alt: "KitaHack 2026 certificate of appreciation awarded to Chiang Xiang Zhi as a participant",
+            width: 1600,
+            height: 1132,
+        },
     },
     {
         kind: "Education",
@@ -101,8 +124,12 @@ const entries: Entry[] = [
 
 const kinds: Kind[] = ["Work", "Education", "Award", "Activity"];
 
+const entryKey = (entry: Entry) => `${entry.title}-${entry.period}`;
+
 export function Timeline() {
     const [filter, setFilter] = useState<Kind | "All">("All");
+    // The first entry starts open so the expand affordance is visible without a click.
+    const [open, setOpen] = useState<string | null>(entryKey(entries[0]));
     const tabsRef = useRef<HTMLDivElement>(null);
     const [indicator, setIndicator] = useState({ left: 0, width: 0 });
 
@@ -228,48 +255,86 @@ export function Timeline() {
             </SectionBar>
 
             <div className="frame list-inset">
-                {visible.map((entry, index) => (
-                    <Reveal
-                        key={`${entry.title}-${entry.period}`}
-                        delay={Math.min(index, 3) * 60}
-                    >
-                        <article
-                            className="log-row grid gap-4 px-6 py-7 md:grid-cols-[13rem_1fr] md:gap-0 md:px-8"
-                        >
-                            <div className="flex flex-wrap items-center gap-3 md:flex-col md:items-start md:gap-3 md:pr-8">
-                                <p className="log-period mono text-[var(--fg)]">
-                                    {entry.period}
-                                </p>
-                                <span className="badge" data-current={entry.current}>
-                                    {entry.kind}
-                                </span>
-                            </div>
+                {visible.map((entry, index) => {
+                    const key = entryKey(entry);
+                    const isOpen = open === key;
+                    const panelId = `log-panel-${index}`;
 
-                            <div className="md:pl-8">
-                                <h3 className="entry-title">{entry.title}</h3>
+                    return (
+                        <Reveal key={key} delay={Math.min(index, 3) * 60}>
+                            <div className="work-row" data-open={isOpen}>
+                                <button
+                                    type="button"
+                                    className="work-toggle"
+                                    aria-expanded={isOpen}
+                                    aria-controls={panelId}
+                                    onClick={() => setOpen(isOpen ? null : key)}
+                                >
+                                    <div className="log-grid">
+                                        <div className="log-meta">
+                                            <span className="log-period mono text-[var(--fg)]">
+                                                {entry.period}
+                                            </span>
+                                            <span className="badge" data-current={entry.current}>
+                                                {entry.kind}
+                                            </span>
+                                        </div>
 
-                                <p className="mono mt-1.5 uppercase tracking-wider text-[var(--fg-muted)]">
-                                    {entry.organization}
-                                    {entry.location && (
-                                        <span className="text-[var(--fg-faint)]">
-                                            {" · "}
-                                            {entry.location}
+                                        <h3 className="entry-title log-title">{entry.title}</h3>
+
+                                        <p className="label log-org">
+                                            {entry.organization}
+                                            {entry.location && (
+                                                <span className="text-[var(--fg-faint)]">
+                                                    {" · "}
+                                                    {entry.location}
+                                                </span>
+                                            )}
+                                        </p>
+
+                                        <span className="work-sign log-sign" aria-hidden="true">
+                                            {isOpen ? "−" : "+"}
                                         </span>
-                                    )}
-                                </p>
+                                    </div>
+                                </button>
 
-                                <p className="log-detail prose-body mt-3.5">
-                                    {entry.description}
-                                </p>
+                                {isOpen && (
+                                    <div id={panelId} className="work-panel">
+                                        <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-7">
+                                            {entry.image && (
+                                                <a
+                                                    href={entry.image.src}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    aria-label={`View full image: ${entry.image.alt}`}
+                                                    className="log-image shrink-0"
+                                                >
+                                                    <Image
+                                                        src={entry.image.src}
+                                                        alt={entry.image.alt}
+                                                        width={entry.image.width}
+                                                        height={entry.image.height}
+                                                        sizes="(max-width: 768px) 100vw, 22rem"
+                                                        className="h-auto w-full"
+                                                    />
+                                                </a>
+                                            )}
+
+                                            <p className="log-detail prose-body min-w-0 flex-1">
+                                                {entry.description}
+                                            </p>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
-                        </article>
-                    </Reveal>
-                ))}
+                        </Reveal>
+                    );
+                })}
             </div>
 
             <div>
                 <div className="frame px-6 py-9 md:px-12">
-                    <a href="/resume.pdf" download="Final Resume Chiang Xiang Zhi.pdf" className="btn">
+                    <a href="/Final%20Resume%20Chiang%20Xiang%20Zhi.pdf" download className="btn">
                         Download resume (PDF)
                     </a>
                 </div>
